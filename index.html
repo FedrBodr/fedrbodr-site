@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+<title>Дмитрий Федоренко (FedrBodr) — IT-фаундер, строю электросёрф-бренд вслух</title>
+<meta name="description" data-i18n-attr="content" data-ru="IT-фаундер Дмитрий Федоренко (FedrBodr). Строю электросёрф-бренд «Русский Лайнап» с нуля в формате build-in-public. Шоу «0-to-prod»: от идеи до боевого запуска." data-en="IT founder Dmitry Fedorenko (FedrBodr). Building the electric-surf brand Russian Lineup from zero, in public. The 0-to-prod show: from idea to launch." content="IT-фаундер Дмитрий Федоренко (FedrBodr). Строю электросёрф-бренд «Русский Лайнап» с нуля в формате build-in-public." />
+<meta name="keywords" content="Дмитрий Федоренко, FedrBodr, электросёрф, фаундер, build in public, стартап, 0-to-prod, Русский Лайнап" />
+<link rel="canonical" href="https://fedrbodr.com/" />
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://fedrbodr.com/" />
+<meta property="og:title" content="Дмитрий Федоренко (FedrBodr) — строю электросёрф-бренд вслух" />
+<meta property="og:description" content="IT-фаундер. Из кода — в электросёрф. Показываю весь путь 0-to-prod без монтажа." />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:image" content="https://fedrbodr.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Дмитрий Федоренко (FedrBodr) — строю электросёрф-бренд вслух" />
+<meta name="twitter:description" content="IT-фаундер. Из кода — в электросёрф. Показываю весь путь 0-to-prod без монтажа." />
+
+<meta name="theme-color" content="#0039A6" />
+<!-- Inline SVG favicon: wave in brand blue -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230039A6'/%3E%3Cpath d='M8 62c12 0 12-14 24-14s12 14 24 14 12-14 24-14 12 14 12 14' fill='none' stroke='%237EC8E3' stroke-width='8' stroke-linecap='round'/%3E%3Ctext x='50' y='42' font-family='Arial,Helvetica,sans-serif' font-size='40' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+<style>
+  :root{
+    --blue:#0039A6;
+    --sky:#7EC8E3;
+    --red:#D52B1E;
+    --ink:#0e1726;
+    --muted:#5a6473;
+    --bg:#f7f8fa;
+    --card:#ffffff;
+    --line:#e6e9ef;
+    --radius:18px;
+    --maxw:960px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em;margin-bottom:8px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;color:var(--blue);margin-bottom:14px}
+  .lead{color:var(--muted);font-size:17px;max-width:640px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(247,248,250,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{font-weight:800;letter-spacing:-.02em;font-size:19px;display:flex;align-items:center;gap:9px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--red)}
+  .nav-links{display:flex;align-items:center;gap:22px}
+  .nav-links a{font-size:14px;color:var(--muted);font-weight:500}
+  .nav-links a:hover{color:var(--ink)}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+  .lang button{border:0;background:transparent;padding:6px 12px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
+  .lang button.active{background:var(--blue);color:#fff}
+  @media(max-width:640px){.nav-links a:not(.lang-wrap){display:none}}
+
+  /* Hero */
+  .hero{padding:76px 0 60px;position:relative;overflow:hidden}
+  .hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;letter-spacing:-.03em;max-width:15ch}
+  .hero .accent{color:var(--blue)}
+  .hero p.sub{margin-top:20px;font-size:clamp(17px,2.4vw,20px);color:var(--muted);max-width:52ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .12s ease,box-shadow .12s ease;cursor:pointer;border:1px solid transparent}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--red);color:#fff;box-shadow:0 6px 18px rgba(213,43,30,.28)}
+  .btn-ghost{background:var(--card);border-color:var(--line);color:var(--ink)}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{font-size:13px;color:var(--blue);background:rgba(126,200,227,.18);border:1px solid rgba(126,200,227,.5);padding:6px 12px;border-radius:999px;font-weight:600}
+  .wave{display:block;width:100%;height:40px;color:var(--sky)}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
+  .about-grid p{color:var(--ink);font-size:16px}
+  .about-grid strong{color:var(--blue)}
+
+  /* Show */
+  .episodes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:26px}
+  .ep{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px}
+  .ep .tag{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
+  .ep h3{font-size:18px;letter-spacing:-.01em}
+  .ep p{color:var(--muted);font-size:14px;flex:1}
+  .ep a{font-weight:700;color:var(--blue);font-size:14px}
+  .ep.soon{opacity:.72}
+
+  /* Build in public / link grid */
+  .link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:26px}
+  .link-card{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;font-weight:600;transition:border-color .12s,transform .12s}
+  .link-card:hover{border-color:var(--blue);transform:translateY(-1px)}
+  .link-card .arrow{color:var(--muted)}
+  .link-card[data-soon="1"]{opacity:.6}
+  .link-card small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+
+  /* Projects */
+  .proj{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:26px}
+  .proj-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden}
+  .proj-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--blue)}
+  .proj-card.dashed{border-style:dashed;background:transparent}
+  .proj-card.dashed::before{background:var(--sky)}
+  .proj-card h3{font-size:19px;margin-bottom:6px}
+  .proj-card p{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .proj-card a{font-weight:700;color:var(--blue);font-size:14px}
+
+  /* Contact */
+  .contact-box{margin-top:22px;background:linear-gradient(135deg,var(--blue),#0a4fd0);color:#fff;border-radius:22px;padding:34px}
+  .contact-box h2{color:#fff}
+  .contact-box p{color:rgba(255,255,255,.85);max-width:48ch;margin-top:6px}
+  .contact-box .btn-primary{margin-top:20px}
+
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  .foot-links{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+  .foot-links a{color:var(--muted);font-weight:600}
+  .foot-links a:hover{color:var(--blue)}
+
+  [hidden]{display:none!important}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="dot"></span>FedrBodr</a>
+    <nav class="nav-links">
+      <a href="#about" data-i18n data-ru="Обо мне" data-en="About">Обо мне</a>
+      <a href="#show" data-i18n data-ru="Шоу" data-en="Show">Шоу</a>
+      <a href="#build" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</a>
+      <a href="#projects" data-i18n data-ru="Проекты" data-en="Projects">Проекты</a>
+      <a href="#contact" data-i18n data-ru="Контакт" data-en="Contact">Контакт</a>
+      <span class="lang-wrap lang" role="group" aria-label="Language">
+        <button data-lang="ru" class="active">RU</button>
+        <button data-lang="en">EN</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="IT-фаундер · Build in public" data-en="IT founder · Build in public">IT-фаундер · Build in public</p>
+    <h1 data-i18n data-ru='Строю электросёрф-бренд с нуля — <span class="accent">вслух</span>.' data-en='Building an electric-surf brand from zero — <span class="accent">in public</span>.'>Строю электросёрф-бренд с нуля — <span class="accent">вслух</span>.</h1>
+    <p class="sub" data-i18n data-ru="Меня зовут Дмитрий Федоренко. Из IT — в электросёрф. Показываю весь путь «0-to-prod» без монтажа: что запустил, что сломал, какие цифры увидел." data-en="I'm Dmitry Fedorenko. From IT to electric surfboards. I show the whole 0-to-prod ride, uncut: what I shipped, what broke, what the numbers said.">Меня зовут Дмитрий Федоренко. Из IT — в электросёрф. Показываю весь путь «0-to-prod» без монтажа: что запустил, что сломал, какие цифры увидел.</p>
+    <div class="cta-row">
+      <a href="#show" class="btn btn-primary" data-i18n data-ru="▶ Смотреть шоу" data-en="▶ Watch the show">▶ Смотреть шоу</a>
+      <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n data-ru="Подписаться в Telegram" data-en="Follow on Telegram">Подписаться в Telegram</a>
+    </div>
+    <div class="hero-chips">
+      <span class="chip" data-i18n data-ru="⚡ Электросёрф" data-en="⚡ Electric surf">⚡ Электросёрф</span>
+      <span class="chip" data-i18n data-ru="🛠 0-to-prod" data-en="🛠 0-to-prod">🛠 0-to-prod</span>
+      <span class="chip" data-i18n data-ru="🏄 Серфер" data-en="🏄 Surfer">🏄 Серфер</span>
+      <span class="chip" data-i18n data-ru="🤖 ИИ-проекты" data-en="🤖 AI projects">🤖 ИИ-проекты</span>
+    </div>
+  </div>
+</div>
+<svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 150 40, 300 0, 450 20 S 750 40, 900 20 S 1200 0, 1200 20 L1200 40 L0 40 Z" fill="currentColor" opacity="0.35"/></svg>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="История" data-en="Story">История</p>
+    <h2 data-i18n data-ru="Из IT-инженера — в фаундера электросёрф-бренда" data-en="From IT engineer to electric-surf founder">Из IT-инженера — в фаундера электросёрф-бренда</h2>
+    <div class="about-grid">
+      <p data-i18n data-ru="Днём я инженер. Годами строил чужие продукты внутри корпоративной системы — и в какой-то момент решил построить своё. Так появился <strong>«Русский Лайнап»</strong> — бренд электросёрфа, который я собираю с нуля." data-en="By day I'm an engineer. For years I built other people's products inside the corporate machine — until I decided to build my own. That's how <strong>Russian Lineup</strong> was born: an electric-surf brand I'm building from scratch.">Днём я инженер. Годами строил чужие продукты внутри корпоративной системы — и в какой-то момент решил построить своё. Так появился <strong>«Русский Лайнап»</strong> — бренд электросёрфа, который я собираю с нуля.</p>
+      <p data-i18n data-ru="Делаю это открыто, в формате build-in-public: не блог про «успех», а журнал экспериментов. Каждый шаг — код, продукт, маркетинг, цифры — на виду. Кому-то это карта пути, кому-то — повод собрать своё." data-en="I do it openly, build-in-public style: not a success blog, but a lab journal. Every step — code, product, marketing, numbers — out in the open. For some it's a roadmap, for others a nudge to build their own.">Делаю это открыто, в формате build-in-public: не блог про «успех», а журнал экспериментов. Каждый шаг — код, продукт, маркетинг, цифры — на виду. Кому-то это карта пути, кому-то — повод собрать своё.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SHOW -->
+<section id="show">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="Шоу" data-en="Show">Шоу</p>
+    <h2 data-i18n data-ru="«0-to-prod» — от идеи до боевого запуска" data-en="0-to-prod — from idea to launch">«0-to-prod» — от идеи до боевого запуска</h2>
+    <p class="lead" data-i18n data-ru="Стрим-шоу, где я довожу продукт от нуля до прода в прямом эфире. Без монтажа: видно, где залипаю, что ломается и как чиню." data-en="A stream show where I take a product from zero to production live. Uncut: you see where I get stuck, what breaks, and how I fix it.">Стрим-шоу, где я довожу продукт от нуля до прода в прямом эфире. Без монтажа: видно, где залипаю, что ломается и как чиню.</p>
+    <div class="episodes">
+      <div class="ep">
+        <span class="tag" data-i18n data-ru="Эпизод #1" data-en="Episode #1">Эпизод #1</span>
+        <h3 data-i18n data-ru="Telegram-бот «Русского Лайнапа»" data-en="Russian Lineup Telegram bot">Telegram-бот «Русского Лайнапа»</h3>
+        <p data-i18n data-ru="Приём заявок, AI-чат, промокоды и сквозная аналитика — собираем за сессию и сравниваем с оценками студий." data-en="Lead capture, AI chat, promo codes and end-to-end analytics — built in one session and benchmarked against agency quotes.">Приём заявок, AI-чат, промокоды и сквозная аналитика — собираем за сессию и сравниваем с оценками студий.</p>
+        <a href="#contact" data-i18n data-ru="Смотреть → (ссылка скоро)" data-en="Watch → (link soon)">Смотреть → (ссылка скоро)</a>
+      </div>
+      <div class="ep soon">
+        <span class="tag" data-i18n data-ru="Скоро" data-en="Soon">Скоро</span>
+        <h3 data-i18n data-ru="Следующий эпизод" data-en="Next episode">Следующий эпизод</h3>
+        <p data-i18n data-ru="Планирую следующий стрим. Подпишись в Telegram, чтобы не пропустить анонс." data-en="Planning the next stream. Follow on Telegram so you don't miss the drop.">Планирую следующий стрим. Подпишись в Telegram, чтобы не пропустить анонс.</p>
+        <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener" data-i18n data-ru="Подписаться →" data-en="Follow →">Подписаться →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD IN PUBLIC -->
+<section id="build">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</p>
+    <h2 data-i18n data-ru="Где я пишу процесс" data-en="Where I post the process">Где я пишу процесс</h2>
+    <p class="lead" data-i18n data-ru="Дневник эксперимента живёт в нескольких местах — по-русски и по-английски." data-en="The experiment log lives in a few places — in Russian and English.">Дневник эксперимента живёт в нескольких местах — по-русски и по-английски.</p>
+    <div class="link-grid">
+      <a class="link-card" href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener"><span>Telegram<small data-i18n data-ru="Живой дневник" data-en="Live journal">Живой дневник</small></span><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener"><span>LinkedIn<small data-i18n data-ru="Build in public (EN)" data-en="Build in public (EN)">Build in public (EN)</small></span><span class="arrow">→</span></a>
+      <a class="link-card" href="https://instagram.com/fedrbodr" target="_blank" rel="noopener"><span>Instagram<small data-i18n data-ru="Бэкстейдж" data-en="Backstage">Бэкстейдж</small></span><span class="arrow">→</span></a>
+      <a class="link-card" href="#" data-soon="1"><span>X / Twitter<small data-i18n data-ru="Ссылка скоро" data-en="Link soon">Ссылка скоро</small></span><span class="arrow">→</span></a>
+      <a class="link-card" href="#" data-soon="1"><span>vc.ru<small data-i18n data-ru="Ссылка скоро" data-en="Link soon">Ссылка скоро</small></span><span class="arrow">→</span></a>
+      <a class="link-card" href="#" data-soon="1"><span>Habr<small data-i18n data-ru="Ссылка скоро" data-en="Link soon">Ссылка скоро</small></span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="Проекты" data-en="Projects">Проекты</p>
+    <h2 data-i18n data-ru="Что я строю" data-en="What I'm building">Что я строю</h2>
+    <div class="proj">
+      <div class="proj-card">
+        <h3>Русский Лайнап</h3>
+        <p data-i18n data-ru="Электросёрф-бренд, который я собираю с нуля: продукт, магазин, комьюнити, аналитика." data-en="An electric-surf brand I'm building from scratch: product, shop, community, analytics.">Электросёрф-бренд, который я собираю с нуля: продукт, магазин, комьюнити, аналитика.</p>
+        <a href="https://russianlineup.ru" target="_blank" rel="noopener" data-i18n data-ru="russianlineup.ru →" data-en="russianlineup.ru →">russianlineup.ru →</a>
+      </div>
+      <div class="proj-card dashed">
+        <h3 data-i18n data-ru="Следующий проект" data-en="Next project">Следующий проект</h3>
+        <p data-i18n data-ru="Здесь появится следующее, что я запущу. Следи за процессом в шоу и Telegram." data-en="Whatever I ship next lands here. Follow along in the show and on Telegram.">Здесь появится следующее, что я запущу. Следи за процессом в шоу и Telegram.</p>
+        <a href="#build" data-i18n data-ru="Следить →" data-en="Follow →">Следить →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <p class="eyebrow" style="color:var(--sky)" data-i18n data-ru="Контакт" data-en="Contact">Контакт</p>
+      <h2 data-i18n data-ru="Партнёрство, пресса или спикерство?" data-en="Partnership, press or speaking?">Партнёрство, пресса или спикерство?</h2>
+      <p data-i18n data-ru="Открыт к коллаборациям, интервью и выступлениям про build-in-public, электросёрф и запуск продуктов с ИИ. Напишите — отвечу." data-en="Open to collaborations, interviews and talks on build-in-public, electric surf and shipping products with AI. Drop me a line — I'll reply.">Открыт к коллаборациям, интервью и выступлениям про build-in-public, электросёрф и запуск продуктов с ИИ. Напишите — отвечу.</p>
+      <a href="https://t.me/FedrBodr" target="_blank" rel="noopener" class="btn btn-primary" data-i18n data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://instagram.com/fedrbodr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://russianlineup.ru" target="_blank" rel="noopener">Русский Лайнап</a>
+      <a href="https://t.me/RussianLineupBot" target="_blank" rel="noopener">Bot</a>
+    </div>
+    <div data-i18n data-ru="© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух." data-en="© 2026 Dmitry Fedorenko (FedrBodr). Built in public.">© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var STORE_OK = false; // no storage in some sandboxes; degrade gracefully
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    // text nodes
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v = el.getAttribute('data-'+lang);
+      if(v!==null) el.innerHTML = v;
+    });
+    // attributes (e.g. meta description)
+    document.querySelectorAll('[data-i18n-attr]').forEach(function(el){
+      var attr = el.getAttribute('data-i18n-attr');
+      var v = el.getAttribute('data-'+lang);
+      if(v!==null) el.setAttribute(attr, v);
+    });
+    document.querySelectorAll('.lang button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+    });
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+  // default: RU, but respect browser preference for EN
+  var initial = (navigator.language||'ru').toLowerCase().indexOf('ru')===0 ? 'ru' : 'ru';
+  setLang(initial);
+})();
+</script>
+</body>
+</html>
