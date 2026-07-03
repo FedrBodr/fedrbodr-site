@@ -119,6 +119,14 @@
   .contact-box p{color:rgba(255,255,255,.85);max-width:48ch;margin-top:6px}
   .contact-box .btn-primary{margin-top:20px}
 
+  /* Order / work-with-me */
+  .order{background:linear-gradient(180deg,#ffffff,#eef3fb)}
+  .order .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:26px 0}
+  .order .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .order .step-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:17px;margin-bottom:12px}
+  .order .step h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
+  .order .step p{color:var(--muted);font-size:14px}
+  .order .fineprint{color:var(--muted);font-size:13px;margin-top:14px}
   footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   .foot-links{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
   .foot-links a{color:var(--muted);font-weight:600}
@@ -137,6 +145,7 @@
       <a href="#show" data-i18n data-ru="Шоу" data-en="Show">Шоу</a>
       <a href="#build" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</a>
       <a href="#projects" data-i18n data-ru="Проекты" data-en="Projects">Проекты</a>
+      <a href="#order" data-i18n data-ru="Разработка" data-en="Development">Разработка</a>
       <a href="#contact" data-i18n data-ru="Контакт" data-en="Contact">Контакт</a>
       <span class="lang-wrap lang" role="group" aria-label="Language">
         <button data-lang="ru" class="active">RU</button>
@@ -155,8 +164,9 @@
     <h1 data-i18n data-ru='Строю электросёрф-бренд с нуля — <span class="accent">вслух</span>.' data-en='Building an electric-surf brand from zero — <span class="accent">in public</span>.'>Строю электросёрф-бренд с нуля — <span class="accent">вслух</span>.</h1>
     <p class="sub" data-i18n data-ru="Меня зовут Дмитрий Федоренко. Из IT — в электросёрф. Показываю весь путь «0-to-prod» без монтажа: что запустил, что сломал, какие цифры увидел." data-en="I'm Dmitry Fedorenko. From IT to electric surfboards. I show the whole 0-to-prod ride, uncut: what I shipped, what broke, what the numbers said.">Меня зовут Дмитрий Федоренко. Из IT — в электросёрф. Показываю весь путь «0-to-prod» без монтажа: что запустил, что сломал, какие цифры увидел.</p>
     <div class="cta-row">
-      <a href="#show" class="btn btn-primary" data-i18n data-ru="▶ Смотреть шоу" data-en="▶ Watch the show">▶ Смотреть шоу</a>
-      <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n data-ru="Подписаться в Telegram" data-en="Follow on Telegram">Подписаться в Telegram</a>
+      <a href="#order" class="btn btn-primary" data-i18n data-ru="⚡ Заказать разработку" data-en="⚡ Order a build">⚡ Заказать разработку</a>
+      <a href="#show" class="btn btn-ghost" data-i18n data-ru="▶ Смотреть шоу" data-en="▶ Watch the show">▶ Смотреть шоу</a>
+      <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n data-ru="Подписаться" data-en="Follow">Подписаться</a>
     </div>
     <div class="hero-chips">
       <span class="chip" data-i18n data-ru="⚡ Электросёрф" data-en="⚡ Electric surf">⚡ Электросёрф</span>
@@ -167,6 +177,34 @@
   </div>
 </div>
 <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 150 40, 300 0, 450 20 S 750 40, 900 20 S 1200 0, 1200 20 L1200 40 L0 40 Z" fill="currentColor" opacity="0.35"/></svg>
+
+<!-- ORDER / WORK WITH ME -->
+<section id="order" class="order">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="Работа со мной" data-en="Work with me">Работа со мной</p>
+    <h2 data-i18n data-ru="MVP и кастомные решения — от 2 дней" data-en="MVP & custom builds — from 2 days">MVP и кастомные решения — от 2 дней</h2>
+    <p class="lead" data-i18n data-ru="Соберу MVP для вашего IT-проекта или кастомное решение под ваш бизнес-процесс. Быстро, прозрачно, с рабочим релизом в конце." data-en="I'll build an MVP for your IT project or a custom solution for your business process. Fast, transparent, with a working release at the end.">Соберу MVP для вашего IT-проекта или кастомное решение под ваш бизнес-процесс. Быстро, прозрачно, с рабочим релизом в конце.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">1</span>
+        <h3 data-i18n data-ru="День 1 — разработка" data-en="Day 1 — build">День 1 — разработка</h3>
+        <p data-i18n data-ru="Собираю решение и поднимаю инфраструктуру: деплой, домен, база — всё рабочее." data-en="I build the solution and set up the infrastructure: deploy, domain, database — all live.">Собираю решение и поднимаю инфраструктуру: деплой, домен, база — всё рабочее.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">2</span>
+        <h3 data-i18n data-ru="День 2 — правки" data-en="Day 2 — feedback">День 2 — правки</h3>
+        <p data-i18n data-ru="Показываю результат, собираю обратную связь и вношу правки под вашу задачу." data-en="I show the result, gather feedback and make fixes for your case.">Показываю результат, собираю обратную связь и вношу правки под вашу задачу.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">✓</span>
+        <h3 data-i18n data-ru="Релиз" data-en="Release">Релиз</h3>
+        <p data-i18n data-ru="Фиксируем результат — рабочий продукт у вас на руках, дальше растим по желанию." data-en="We lock the result — a working product in your hands, ready to grow further.">Фиксируем результат — рабочий продукт у вас на руках, дальше растим по желанию.</p>
+      </div>
+    </div>
+    <a href="https://t.me/FedrBodr" target="_blank" rel="noopener" class="btn btn-primary" data-i18n data-ru="Обсудить задачу в Telegram" data-en="Discuss your task on Telegram">Обсудить задачу в Telegram</a>
+    <p class="fineprint" data-i18n data-ru="Цена — по задаче, обсуждаем в личке. Старт — после небольшой предоплаты." data-en="Price depends on scope, discussed in DM. Start after a small upfront deposit.">Цена — по задаче, обсуждаем в личке. Старт — после небольшой предоплаты.</p>
+  </div>
+</section>
 
 <!-- ABOUT -->
 <section id="about">
