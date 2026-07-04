@@ -127,6 +127,13 @@
   .order .step h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
   .order .step p{color:var(--muted);font-size:14px}
   .order .fineprint{color:var(--muted);font-size:13px;margin-top:14px}
+  /* Experience / track record */
+  .creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:26px 0}
+  .cred{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .cred .big{font-size:26px;font-weight:800;color:var(--blue);letter-spacing:-.02em;line-height:1.1}
+  .cred p{color:var(--muted);font-size:14px;margin-top:4px}
+  .companies{color:var(--muted);font-size:15px;margin-top:6px}
+  .companies strong{color:var(--ink)}
   footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   .foot-links{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
   .foot-links a{color:var(--muted);font-weight:600}
@@ -146,6 +153,7 @@
       <a href="#build" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</a>
       <a href="#projects" data-i18n data-ru="Проекты" data-en="Projects">Проекты</a>
       <a href="#order" data-i18n data-ru="Разработка" data-en="Development">Разработка</a>
+      <a href="#experience" data-i18n data-ru="Опыт" data-en="Track record">Опыт</a>
       <a href="#contact" data-i18n data-ru="Контакт" data-en="Contact">Контакт</a>
       <span class="lang-wrap lang" role="group" aria-label="Language">
         <button data-lang="ru" class="active">RU</button>
@@ -160,9 +168,9 @@
 <!-- HERO -->
 <div class="hero">
   <div class="wrap">
-    <p class="eyebrow" data-i18n data-ru="IT-фаундер · Build in public" data-en="IT founder · Build in public">IT-фаундер · Build in public</p>
-    <h1 data-i18n data-ru='Строю электросёрф-бренд с нуля — <span class="accent">вслух</span>.' data-en='Building an electric-surf brand from zero — <span class="accent">in public</span>.'>Строю электросёрф-бренд с нуля — <span class="accent">вслух</span>.</h1>
-    <p class="sub" data-i18n data-ru="Меня зовут Дмитрий Федоренко. Из IT — в электросёрф. Показываю весь путь «0-to-prod» без монтажа: что запустил, что сломал, какие цифры увидел." data-en="I'm Dmitry Fedorenko. From IT to electric surfboards. I show the whole 0-to-prod ride, uncut: what I shipped, what broke, what the numbers said.">Меня зовут Дмитрий Федоренко. Из IT — в электросёрф. Показываю весь путь «0-to-prod» без монтажа: что запустил, что сломал, какие цифры увидел.</p>
+    <p class="eyebrow" data-i18n data-ru="Разработка MVP · Build in public" data-en="MVP development · Build in public">Разработка MVP · Build in public</p>
+    <h1 data-i18n data-ru='Соберу ваш MVP от идеи до прода — <span class="accent">за дни</span>.' data-en='I ship your MVP from idea to production — <span class="accent">in days</span>.'>Соберу ваш MVP от идеи до прода — <span class="accent">за дни</span>.</h1>
+    <p class="sub" data-i18n data-ru='Я Дмитрий Федоренко, IT-фаундер. Свой электросёрф-бренд «Русский Лайнап» строю вслух, в формате «0-to-prod». Так же быстро соберу продукт под вашу задачу.' data-en="I'm Dmitry Fedorenko, IT founder. I build my own electric-surf brand, Russian Lineup, in public — 0-to-prod. I'll ship your product just as fast.">Я Дмитрий Федоренко, IT-фаундер. Свой электросёрф-бренд «Русский Лайнап» строю вслух, в формате «0-to-prod». Так же быстро соберу продукт под вашу задачу.</p>
     <div class="cta-row">
       <a href="#order" class="btn btn-primary" data-i18n data-ru="⚡ Заказать разработку" data-en="⚡ Order a build">⚡ Заказать разработку</a>
       <a href="#show" class="btn btn-ghost" data-i18n data-ru="▶ Смотреть шоу" data-en="▶ Watch the show">▶ Смотреть шоу</a>
@@ -203,6 +211,22 @@
     </div>
     <a href="https://t.me/FedrBodr" target="_blank" rel="noopener" class="btn btn-primary" data-i18n data-ru="Обсудить задачу в Telegram" data-en="Discuss your task on Telegram">Обсудить задачу в Telegram</a>
     <p class="fineprint" data-i18n data-ru="Цена — по задаче, обсуждаем в личке. Старт — после небольшой предоплаты." data-en="Price depends on scope, discussed in DM. Start after a small upfront deposit.">Цена — по задаче, обсуждаем в личке. Старт — после небольшой предоплаты.</p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="Опыт" data-en="Track record">Опыт</p>
+    <h2 data-i18n data-ru="15+ лет в разработке — в основном финтех" data-en="15+ years in software — mostly fintech">15+ лет в разработке — в основном финтех</h2>
+    <p class="lead" data-i18n data-ru="Прошёл путь от инженера до тимлида и CTO: интернет-банки, крипто-финтех, платежи и собственные продукты с нуля до релиза." data-en="I've gone from engineer to team lead and CTO: online banks, crypto-fintech, payments and my own products built from scratch to release.">Прошёл путь от инженера до тимлида и CTO: интернет-банки, крипто-финтех, платежи и собственные продукты с нуля до релиза.</p>
+    <div class="creds">
+      <div class="cred"><div class="big">15+</div><p data-i18n data-ru="лет коммерческой разработки" data-en="years of commercial development">лет коммерческой разработки</p></div>
+      <div class="cred"><div class="big" data-i18n data-ru="Тимлид" data-en="Team lead">Тимлид</div><p data-i18n data-ru="собрал и вёл команду до 13 человек" data-en="built and led a team of up to 13">собрал и вёл команду до 13 человек</p></div>
+      <div class="cred"><div class="big" data-i18n data-ru="CTO-опыт" data-en="CTO experience">CTO-опыт</div><p data-i18n data-ru="свои продукты от MVP до релиза" data-en="own products from MVP to release">свои продукты от MVP до релиза</p></div>
+      <div class="cred"><div class="big" data-i18n data-ru="Платежи" data-en="Payments">Платежи</div><p data-i18n data-ru="десятки интеграций: карты, крипта, PayPal, Тинькофф" data-en="dozens of integrations: cards, crypto, PayPal, Tinkoff">десятки интеграций: карты, крипта, PayPal, Тинькофф</p></div>
+    </div>
+    <p class="companies" data-i18n data-ru='Проекты для банков и финтеха: <strong>Сбербанк, Райффайзен, Альфа-Банк, Crypterium</strong> и др.' data-en='Bank &amp; fintech projects: <strong>Sberbank, Raiffeisen, Alfa-Bank, Crypterium</strong> and more.'>Проекты для банков и финтеха: <strong>Сбербанк, Райффайзен, Альфа-Банк, Crypterium</strong> и др.</p>
   </div>
 </section>
 
