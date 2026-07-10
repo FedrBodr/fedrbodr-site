@@ -3,3 +3,7 @@ deploy.config
 
 # macOS
 .DS_Store
+
+# Оригиналы фото (тяжёлые) — на сайт идут оптимизированные копии из img/
+FedrBodrSqare.png
+photo_2024-08-19_17-14-57.jpg

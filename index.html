@@ -16,14 +16,23 @@
 <meta property="og:description" content="IT-фаундер. Из кода — в электросёрф. Показываю весь путь 0-to-prod без монтажа." />
 <meta property="og:locale" content="ru_RU" />
 <meta property="og:locale:alternate" content="en_US" />
-<meta property="og:image" content="https://fedrbodr.com/og-image.png" />
-<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://fedrbodr.com/og-image.jpg" />
+<meta property="og:image:width" content="820" />
+<meta property="og:image:height" content="820" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://fedrbodr.com/og-image.jpg" />
 <meta name="twitter:title" content="Дмитрий Федоренко (FedrBodr) — строю электросёрф-бренд вслух" />
 <meta name="twitter:description" content="IT-фаундер. Из кода — в электросёрф. Показываю весь путь 0-to-prod без монтажа." />
 
 <meta name="theme-color" content="#0039A6" />
 <!-- Inline SVG favicon: wave in brand blue -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230039A6'/%3E%3Cpath d='M8 62c12 0 12-14 24-14s12 14 24 14 12-14 24-14 12 14 12 14' fill='none' stroke='%237EC8E3' stroke-width='8' stroke-linecap='round'/%3E%3Ctext x='50' y='42' font-family='Arial,Helvetica,sans-serif' font-size='40' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Type: Unbounded (display) + Golos Text (body) + JetBrains Mono (labels) — все с кириллицей -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
 <style>
   :root{
@@ -41,38 +50,68 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-family:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     color:var(--ink);
     background:var(--bg);
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
   section{padding:64px 0;border-top:1px solid var(--line)}
-  h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em;margin-bottom:8px}
-  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;color:var(--blue);margin-bottom:14px}
+  h1,h2{font-family:"Unbounded","Golos Text",sans-serif;font-weight:700}
+  h2{font-size:clamp(20px,3.2vw,28px);letter-spacing:-.01em;margin-bottom:8px;line-height:1.25}
+  .eyebrow{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;color:var(--blue);margin-bottom:14px}
+  .eyebrow::before{content:"// ";color:var(--red)}
   .lead{color:var(--muted);font-size:17px;max-width:640px}
 
   /* Header */
   header{position:sticky;top:0;z-index:50;background:rgba(247,248,250,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .brand{font-weight:800;letter-spacing:-.02em;font-size:19px;display:flex;align-items:center;gap:9px}
-  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--red)}
+  .brand{font-family:"Unbounded",sans-serif;font-weight:700;letter-spacing:-.01em;font-size:16px;display:flex;align-items:center;gap:10px}
+  .brand-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--red);flex:none}
   .nav-links{display:flex;align-items:center;gap:22px}
   .nav-links a{font-size:14px;color:var(--muted);font-weight:500}
   .nav-links a:hover{color:var(--ink)}
   .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
   .lang button{border:0;background:transparent;padding:6px 12px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
   .lang button.active{background:var(--blue);color:#fff}
-  @media(max-width:640px){.nav-links a:not(.lang-wrap){display:none}}
+  @media(max-width:820px){.nav-links a:not(.lang-wrap){display:none}}
 
   /* Hero */
-  .hero{padding:76px 0 60px;position:relative;overflow:hidden}
-  .hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;letter-spacing:-.03em;max-width:15ch}
+  .hero{padding:64px 0 56px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,56px);align-items:center}
+  .hero h1{font-size:clamp(26px,4.6vw,42px);line-height:1.14;letter-spacing:-.02em;max-width:18ch}
   .hero .accent{color:var(--blue)}
-  .hero p.sub{margin-top:20px;font-size:clamp(17px,2.4vw,20px);color:var(--muted);max-width:52ch}
+  .hero p.sub{margin-top:20px;font-size:clamp(16px,2.2vw,18px);color:var(--muted);max-width:52ch}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+  /* Portrait: доска-капсула с красной обводкой в цвет футболки */
+  .portrait-wrap{justify-self:center;position:relative;transform:rotate(2deg)}
+  .portrait{display:block;width:min(300px,72vw);aspect-ratio:3/4.4;object-fit:cover;object-position:58% 22%;
+    border-radius:999px;outline:3px solid var(--red);outline-offset:9px;
+    box-shadow:0 24px 60px rgba(0,57,166,.22)}
+  .portrait-tag{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%) rotate(-2deg);white-space:nowrap;
+    font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:var(--blue);
+    background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+    box-shadow:0 4px 14px rgba(14,23,38,.08)}
+  @media(max-width:760px){
+    .hero-grid{grid-template-columns:1fr}
+    .portrait-wrap{order:-1;margin-bottom:18px}
+    .portrait{width:min(220px,60vw)}
+  }
+  @media(prefers-reduced-motion:no-preference){
+    .hero .eyebrow,.hero h1,.hero .sub,.hero .cta-row,.hero .hero-chips{animation:rise .55s ease both}
+    .hero h1{animation-delay:.05s}
+    .hero .sub{animation-delay:.12s}
+    .hero .cta-row{animation-delay:.2s}
+    .hero .hero-chips{animation-delay:.28s}
+    .portrait-wrap{animation:rise .65s .15s ease both}
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1}}
+  @media(prefers-reduced-motion:no-preference){.portrait-wrap{animation-name:rise-tilt}}
+  @keyframes rise-tilt{from{opacity:0;transform:rotate(2deg) translateY(14px)}to{opacity:1;transform:rotate(2deg) translateY(0)}}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .12s ease,box-shadow .12s ease;cursor:pointer;border:1px solid transparent}
   .btn:hover{transform:translateY(-1px)}
   .btn-primary{background:var(--red);color:#fff;box-shadow:0 6px 18px rgba(213,43,30,.28)}
@@ -89,7 +128,7 @@
   /* Show */
   .episodes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:26px}
   .ep{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px}
-  .ep .tag{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
+  .ep .tag{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
   .ep h3{font-size:18px;letter-spacing:-.01em}
   .ep p{color:var(--muted);font-size:14px;flex:1}
   .ep a{font-weight:700;color:var(--blue);font-size:14px}
@@ -112,6 +151,7 @@
   .proj-card h3{font-size:19px;margin-bottom:6px}
   .proj-card p{color:var(--muted);font-size:14px;margin-bottom:12px}
   .proj-card a{font-weight:700;color:var(--blue);font-size:14px}
+  .proj-card .links{display:flex;flex-wrap:wrap;gap:16px}
 
   /* Contact */
   .contact-box{margin-top:22px;background:linear-gradient(135deg,var(--blue),#0a4fd0);color:#fff;border-radius:22px;padding:34px}
@@ -130,7 +170,7 @@
   /* Experience / track record */
   .creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:26px 0}
   .cred{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .cred .big{font-size:26px;font-weight:800;color:var(--blue);letter-spacing:-.02em;line-height:1.1}
+  .cred .big{font-family:"Unbounded",sans-serif;font-size:22px;font-weight:700;color:var(--blue);letter-spacing:-.01em;line-height:1.15}
   .cred p{color:var(--muted);font-size:14px;margin-top:4px}
   .companies{color:var(--muted);font-size:15px;margin-top:6px}
   .companies strong{color:var(--ink)}
@@ -146,7 +186,7 @@
 <body>
 <header>
   <div class="wrap nav">
-    <a href="#top" class="brand"><span class="dot"></span>FedrBodr</a>
+    <a href="#top" class="brand"><img class="brand-avatar" src="img/avatar.jpg" alt="Дмитрий Федоренко" width="30" height="30" />FedrBodr</a>
     <nav class="nav-links">
       <a href="#about" data-i18n data-ru="Обо мне" data-en="About">Обо мне</a>
       <a href="#show" data-i18n data-ru="Шоу" data-en="Show">Шоу</a>
@@ -167,7 +207,8 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="wrap">
+  <div class="wrap hero-grid">
+    <div>
     <p class="eyebrow" data-i18n data-ru="Разработка MVP · Build in public" data-en="MVP development · Build in public">Разработка MVP · Build in public</p>
     <h1 data-i18n data-ru='Соберу ваш MVP от идеи до прода — <span class="accent">за дни</span>.' data-en='I ship your MVP from idea to production — <span class="accent">in days</span>.'>Соберу ваш MVP от идеи до прода — <span class="accent">за дни</span>.</h1>
     <p class="sub" data-i18n data-ru='Я Дмитрий Федоренко, IT-фаундер. Свой электросёрф-бренд «Русский Лайнап» строю вслух, в формате «0-to-prod». Так же быстро соберу продукт под вашу задачу.' data-en="I'm Dmitry Fedorenko, IT founder. I build my own electric-surf brand, Russian Lineup, in public — 0-to-prod. I'll ship your product just as fast.">Я Дмитрий Федоренко, IT-фаундер. Свой электросёрф-бренд «Русский Лайнап» строю вслух, в формате «0-to-prod». Так же быстро соберу продукт под вашу задачу.</p>
@@ -181,6 +222,11 @@
       <span class="chip" data-i18n data-ru="🛠 0-to-prod" data-en="🛠 0-to-prod">🛠 0-to-prod</span>
       <span class="chip" data-i18n data-ru="🏄 Серфер" data-en="🏄 Surfer">🏄 Серфер</span>
       <span class="chip" data-i18n data-ru="🤖 ИИ-проекты" data-en="🤖 AI projects">🤖 ИИ-проекты</span>
+    </div>
+    </div>
+    <div class="portrait-wrap">
+      <img class="portrait" src="img/portrait.jpg" alt="Дмитрий Федоренко с сёрфбордом на пляже" width="300" height="440" fetchpriority="high" />
+      <span class="portrait-tag" data-i18n data-ru="// фаундер в естественной среде" data-en="// founder in natural habitat">// фаундер в естественной среде</span>
     </div>
   </div>
 </div>
@@ -293,6 +339,14 @@
         <p data-i18n data-ru="Электросёрф-бренд, который я собираю с нуля: продукт, магазин, комьюнити, аналитика." data-en="An electric-surf brand I'm building from scratch: product, shop, community, analytics.">Электросёрф-бренд, который я собираю с нуля: продукт, магазин, комьюнити, аналитика.</p>
         <a href="https://russianlineup.ru" target="_blank" rel="noopener" data-i18n data-ru="russianlineup.ru →" data-en="russianlineup.ru →">russianlineup.ru →</a>
       </div>
+      <div class="proj-card">
+        <h3>Vezdepost</h3>
+        <p data-i18n data-ru="Open-source планировщик публикаций: один пост — сразу в Telegram, MAX, VK, X и ещё 30+ платформ, по расписанию, с календарём и аналитикой. AI-developed форк Postiz, развиваю с помощью Claude Code: русский интерфейс, российские платформы, хостинг в РФ. Облако сейчас бесплатно, self-host — бесплатен всегда." data-en="An open-source post scheduler: one post goes to Telegram, MAX, VK, X and 30+ more platforms — scheduled, with a calendar and analytics. An AI-developed Postiz fork I grow with Claude Code: Russian UI, Russian platforms, hosting in Russia. Cloud is free for now, self-host is free forever.">Open-source планировщик публикаций: один пост — сразу в Telegram, MAX, VK, X и ещё 30+ платформ, по расписанию, с календарём и аналитикой. AI-developed форк Postiz, развиваю с помощью Claude Code: русский интерфейс, российские платформы, хостинг в РФ. Облако сейчас бесплатно, self-host — бесплатен всегда.</p>
+        <div class="links">
+          <a href="https://vezdepost.ru" target="_blank" rel="noopener">vezdepost.ru →</a>
+          <a href="https://github.com/FedrBodr/vezdepost" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </div>
       <div class="proj-card dashed">
         <h3 data-i18n data-ru="Следующий проект" data-en="Next project">Следующий проект</h3>
         <p data-i18n data-ru="Здесь появится следующее, что я запущу. Следи за процессом в шоу и Telegram." data-en="Whatever I ship next lands here. Follow along in the show and on Telegram.">Здесь появится следующее, что я запущу. Следи за процессом в шоу и Telegram.</p>
@@ -321,6 +375,7 @@
       <a href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://instagram.com/fedrbodr" target="_blank" rel="noopener">Instagram</a>
       <a href="https://russianlineup.ru" target="_blank" rel="noopener">Русский Лайнап</a>
+      <a href="https://vezdepost.ru" target="_blank" rel="noopener">Vezdepost</a>
       <a href="https://t.me/RussianLineupBot" target="_blank" rel="noopener">Bot</a>
     </div>
     <div data-i18n data-ru="© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух." data-en="© 2026 Dmitry Fedorenko (FedrBodr). Built in public.">© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух.</div>
