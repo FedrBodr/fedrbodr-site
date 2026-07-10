@@ -34,6 +34,37 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
+<!-- Analytics: инициализируется только на боевом домене, чтобы localhost/превью не пачкали статистику -->
+<script>
+(function(){
+  if (location.hostname !== 'fedrbodr.com') return;
+
+  /* Яндекс.Метрика — официальный тег (defer) */
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.defer=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+  ym(110561904, 'init', {
+    webvisor: true,
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true
+  });
+
+  /* Google Analytics 4 — gtag.js */
+  var gs = document.createElement('script');
+  gs.async = true;
+  gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1JEYNEBCW1';
+  document.head.appendChild(gs);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', 'G-1JEYNEBCW1');
+})();
+</script>
+
 <style>
   :root{
     --blue:#0039A6;
@@ -408,6 +439,63 @@
   // default: RU, but respect browser preference for EN
   var initial = (navigator.language||'ru').toLowerCase().indexOf('ru')===0 ? 'ru' : 'ru';
   setLang(initial);
+})();
+</script>
+
+<script>
+/* Отслеживание целей: один делегированный обработчик на document.
+   Не зависит от i18n: слушатель не привязан к содержимому ссылок,
+   поэтому переключение языка (замена innerHTML) ничего не ломает и не дублирует. */
+(function(){
+  var YM_ID = 110561904;
+
+  function track(goal, params){
+    if (location.hostname !== 'fedrbodr.com') return;
+    if (typeof ym === 'function') ym(YM_ID, 'reachGoal', goal, params);
+    if (typeof gtag === 'function') gtag('event', goal, params || {});
+  }
+
+  function sectionOf(el){
+    var sec = el.closest('section[id], .hero, header, footer');
+    if (!sec) return 'page';
+    if (sec.id) return sec.id;
+    if (sec.classList && sec.classList.contains('hero')) return 'hero';
+    return sec.tagName.toLowerCase();
+  }
+
+  var SOCIALS = {
+    'linkedin.com': 'linkedin',
+    'instagram.com': 'instagram',
+    'github.com': 'github'
+  };
+
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+
+    var section = sectionOf(a);
+
+    // Цель: клик по CTA «⚡ Заказать разработку» в hero
+    if (a.getAttribute('href') === '#order' && a.classList.contains('btn-primary')) {
+      track('order_click', { section: section });
+      return;
+    }
+
+    var url;
+    try { url = new URL(a.href, location.href); } catch (_) { return; }
+    var host = url.hostname.replace(/^www\./, '');
+
+    // Цель: любая ссылка на t.me/*
+    if (host === 't.me') {
+      track('tg_click', { link: url.pathname.replace(/^\//, ''), section: section });
+      return;
+    }
+
+    // Цель: внешние соцссылки
+    if (SOCIALS[host]) {
+      track('social_click', { platform: SOCIALS[host], section: section });
+    }
+  }, true);
 })();
 </script>
 </body>
