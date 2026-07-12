@@ -189,7 +189,7 @@
   .contact-box{margin-top:22px;background:linear-gradient(135deg,var(--blue),#0a4fd0);color:#fff;border-radius:22px;padding:34px}
   .contact-box h2{color:#fff}
   .contact-box p{color:rgba(255,255,255,.85);max-width:48ch;margin-top:6px}
-  .contact-box .btn-primary{margin-top:20px}
+  .contact-box .btn{margin-top:20px;margin-right:10px}
 
   /* Order / work-with-me */
   .order{background:linear-gradient(180deg,#ffffff,#eef3fb)}
@@ -398,6 +398,7 @@
       <h2 data-i18n data-ru="Партнёрство, пресса или спикерство?" data-en="Partnership, press or speaking?">Партнёрство, пресса или спикерство?</h2>
       <p data-i18n data-ru="Открыт к коллаборациям, интервью и выступлениям про запуск IT-продуктов с ИИ, build-in-public и электросёрф. Напишите — отвечу." data-en="Open to collaborations, interviews and talks on shipping IT products with AI, build-in-public and electric surf. Drop me a line — I'll reply.">Открыт к коллаборациям, интервью и выступлениям про запуск IT-продуктов с ИИ, build-in-public и электросёрф. Напишите — отвечу.</p>
       <a href="https://t.me/FedrBodr" target="_blank" rel="noopener" class="btn btn-primary" data-i18n data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</a>
+      <a href="mailto:fedrbodr@gmail.com" class="btn btn-ghost" data-i18n data-ru="✉ fedrbodr@gmail.com" data-en="✉ fedrbodr@gmail.com">✉ fedrbodr@gmail.com</a>
     </div>
   </div>
 </section>
@@ -406,6 +407,7 @@
   <div class="wrap">
     <div class="foot-links">
       <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener">Telegram</a>
+      <a href="mailto:fedrbodr@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://instagram.com/fedrbodr" target="_blank" rel="noopener">Instagram</a>
       <a href="https://russianlineup.ru" target="_blank" rel="noopener">Русский Лайнап</a>
@@ -472,7 +474,20 @@
     'github.com': 'github'
   };
 
+  // Проекты: интерес к портфолио считаем отдельно от соцссылок
+  var PROJECT_HOSTS = {
+    'vezdepost.ru': 'vezdepost',
+    'author.polyglot.moscow': 'polyglot'
+  };
+
   document.addEventListener('click', function(e){
+    // Цель: переключение языка
+    var langBtn = e.target && e.target.closest ? e.target.closest('.lang button') : null;
+    if (langBtn) {
+      track('lang_switch', { lang: langBtn.getAttribute('data-lang') });
+      return;
+    }
+
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (!a) return;
 
@@ -481,6 +496,12 @@
     // Цель: клик по CTA «⚡ Заказать разработку» в hero
     if (a.getAttribute('href') === '#order' && a.classList.contains('btn-primary')) {
       track('order_click', { section: section });
+      return;
+    }
+
+    // Цель: клик по email
+    if ((a.getAttribute('href') || '').indexOf('mailto:') === 0) {
+      track('email_click', { section: section });
       return;
     }
 
@@ -494,11 +515,38 @@
       return;
     }
 
+    // Цель: клик по проекту (сайт проекта или репозиторий FedrBodr/*)
+    if (PROJECT_HOSTS[host]) {
+      track('project_click', { project: PROJECT_HOSTS[host], section: section });
+      return;
+    }
+    var repo = host === 'github.com' && url.pathname.match(/^\/FedrBodr\/([^\/]+)/);
+    if (repo) {
+      track('project_click', { project: repo[1].toLowerCase(), section: section });
+      return;
+    }
+
     // Цель: внешние соцссылки
     if (SOCIALS[host]) {
       track('social_click', { platform: SOCIALS[host], section: section });
     }
   }, true);
+
+  // Цель: пользователь доскроллил до секции услуг (#order)
+  var orderSec = document.getElementById('order');
+  if (orderSec && 'IntersectionObserver' in window) {
+    var seen = false;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting && !seen) {
+          seen = true;
+          track('order_view', {});
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(orderSec);
+  }
 })();
 </script>
 </body>
