@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - A valid saved choice (`ru` or `en`) has priority over browser locale.
-- A Russian primary browser locale selects Russian; all other, missing, or malformed locales select English.
+- A Russian-language primary browser locale, or one from region `RU`, `BY`, `KZ`, or `KG`, selects Russian; all other, missing, or malformed locales select English.
 - Only an explicit RU/EN button click writes `fedrbodr.lang` to `localStorage`.
 - Storage failures must not prevent language selection or switching.
 - Keep one `index.html`; do not add routes, query parameters, runtime dependencies, or duplicated language pages.
@@ -122,9 +122,16 @@ test('saved choice overrides browser locale without rewriting storage', () => {
   assert.deepEqual(page.writes, []);
 });
 
-test('Russian locale selects Russian and other locales select English', () => {
+test('Russian language or conservative Russian-speaking regions select Russian', () => {
   assertLanguage(load({ language: 'ru-RU', languages: ['ru-RU', 'en-US'] }), 'ru');
+  assertLanguage(load({ language: 'be-BY', languages: ['be-BY'] }), 'ru');
+  assertLanguage(load({ language: 'kk-Cyrl-KZ', languages: ['kk-Cyrl-KZ'] }), 'ru');
+  assertLanguage(load({ language: 'ky-KG', languages: ['ky-KG'] }), 'ru');
+});
+
+test('other, missing, or malformed locales select English', () => {
   assertLanguage(load({ language: 'en-US', languages: ['en-US', 'ru-RU'] }), 'en');
+  assertLanguage(load({ language: 'uk-UA', languages: ['uk-UA'] }), 'en');
   assertLanguage(load({ language: 'not_a_locale', languages: ['not_a_locale'] }), 'en');
   assertLanguage(load(), 'en');
 });
@@ -229,7 +236,14 @@ Replace `index.html:421-448` with:
     var locale = '';
     if (navigator.languages && navigator.languages.length) locale = navigator.languages[0];
     else if (navigator.language) locale = navigator.language;
-    return typeof locale === 'string' && /^ru(?:-|$)/i.test(locale) ? 'ru' : 'en';
+    if (typeof locale !== 'string') return 'en';
+    var parts = locale.replace(/_/g, '-').split('-');
+    if (parts[0].toLowerCase() === 'ru') return 'ru';
+    var russianRegions = { RU: true, BY: true, KZ: true, KG: true };
+    for (var i = 1; i < parts.length; i++) {
+      if (/^[a-z]{2}$/i.test(parts[i]) && russianRegions[parts[i].toUpperCase()]) return 'ru';
+    }
+    return 'en';
   }
 
   function saveLanguage(lang){
@@ -279,7 +293,7 @@ rtk node --test tests/language-switch.test.mjs
 rtk git diff --check
 ```
 
-Expected: six passing tests, followed by no whitespace errors.
+Expected: seven passing tests, followed by no whitespace errors.
 
 - [ ] **Step 6: Perform browser smoke checks**
 
@@ -291,7 +305,7 @@ rtk python3 -m http.server 4173
 
 At `http://127.0.0.1:4173/`, verify:
 
-1. With `fedrbodr.lang` absent and the browser locale set to Russian, the page opens in Russian.
+1. With `fedrbodr.lang` absent and the browser locale set to Russian, Belarusian, Kazakhstani, or Kyrgyzstani, the page opens in Russian.
 2. With `fedrbodr.lang` absent and a non-Russian locale, the page opens in English.
 3. Clicking RU or EN updates the visible page, title, description/social metadata, image alternatives, `<html lang>`, active pill, and `aria-pressed` values.
 4. Reloading preserves the clicked language.

@@ -11,8 +11,9 @@ RU/EN switch, remember that explicit choice for later visits.
 The initial language is resolved in this order:
 
 1. A valid saved choice (`ru` or `en`) from `localStorage`.
-2. The browser's preferred languages. Any locale whose primary language is
-   `ru` selects Russian; every other locale selects English.
+2. The browser's primary preferred locale. A locale whose primary language is
+   `ru`, or whose region is `RU`, `BY`, `KZ`, or `KG`, selects Russian. Every
+   other locale selects English.
 3. English if browser locale information is missing or unusable.
 
 Only a click on the language switch is persisted. Automatic locale detection
@@ -51,7 +52,8 @@ detection during page load must not emit a language-switch event.
 Automated checks will cover:
 
 - saved `ru` and `en` choices overriding browser locale;
-- Russian browser locales selecting Russian when nothing is saved;
+- Russian-language browser locales and locales from regions `RU`, `BY`, `KZ`,
+  and `KG` selecting Russian when nothing is saved;
 - non-Russian, missing, or malformed locale data selecting English;
 - a manual switch updating content, metadata, `<html lang>`, button state, and
   storage;
