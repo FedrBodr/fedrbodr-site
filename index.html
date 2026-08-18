@@ -214,15 +214,29 @@
   .link-card small{display:block;color:var(--muted);font-weight:400;font-size:12px}
 
   /* Projects */
-  .proj{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:26px}
-  .proj-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden}
-  .proj-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--blue)}
-  .proj-card.dashed{border-style:dashed;background:transparent}
-  .proj-card.dashed::before{background:var(--sky)}
-  .proj-card h3{font-size:19px;margin-bottom:6px}
+  .project-group{margin-top:34px}
+  .project-group+.project-group{margin-top:46px}
+  .project-group-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px}
+  .project-group-head h3{font-family:"Unbounded","Golos Text",sans-serif;font-size:22px;line-height:1.2}
+  .project-group-head span{font-family:"JetBrains Mono",monospace;color:var(--blue);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;text-align:right}
+  .proj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .proj-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden;min-width:0}
+  .proj-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue)}
+  .proj-card.client-work{border-color:var(--red);box-shadow:0 10px 30px var(--special-shadow)}
+  .proj-card.client-work::before{background:var(--red)}
+  .project-badge{display:inline-block;margin:0 0 14px;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
+  .client-work .project-badge{color:var(--red)}
+  .proj-card h3{font-size:19px;margin-bottom:7px;padding-right:4px}
   .proj-card p{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .proj-card p:last-child{margin-bottom:0}
   .proj-card a{font-weight:700;color:var(--blue);font-size:14px}
   .proj-card .links{display:flex;flex-wrap:wrap;gap:16px}
+  .proj-launched .proj-card{background:var(--soft-2)}
+  @media(max-width:679px){
+    .project-group-head{align-items:flex-start}
+    .project-group-head h3{font-size:20px}
+    .proj{grid-template-columns:1fr}
+  }
 
   /* Contact */
   .contact-box{margin-top:22px;background:linear-gradient(135deg,#1f644b,#174633);color:#fff;border-radius:22px;padding:34px}
@@ -407,24 +421,60 @@
   <div class="wrap">
     <p class="eyebrow" data-i18n data-ru="Проекты" data-en="Projects">Проекты</p>
     <h2 data-i18n data-ru="Что я строю" data-en="What I'm building">Что я строю</h2>
-    <div class="proj">
-      <div class="proj-card">
-        <h3>Vezdepost</h3>
-        <p data-i18n data-ru="Open-source планировщик публикаций: один пост — сразу в Telegram, MAX, VK, X и ещё 30+ платформ, по расписанию, с календарём и аналитикой. AI-developed форк Postiz, развиваю с помощью Claude Code: русский интерфейс, российские платформы, хостинг в РФ. Облако сейчас бесплатно, self-host — бесплатен всегда." data-en="An open-source post scheduler: one post goes to Telegram, MAX, VK, X and 30+ more platforms — scheduled, with a calendar and analytics. An AI-developed Postiz fork I grow with Claude Code: Russian UI, Russian platforms, hosting in Russia. Cloud is free for now, self-host is free forever.">Open-source планировщик публикаций: один пост — сразу в Telegram, MAX, VK, X и ещё 30+ платформ, по расписанию, с календарём и аналитикой. AI-developed форк Postiz, развиваю с помощью Claude Code: русский интерфейс, российские платформы, хостинг в РФ. Облако сейчас бесплатно, self-host — бесплатен всегда.</p>
-        <div class="links">
-          <a href="https://vezdepost.ru" target="_blank" rel="noopener">vezdepost.ru →</a>
-          <a href="https://github.com/FedrBodr/vezdepost" target="_blank" rel="noopener">GitHub →</a>
-        </div>
+
+    <div class="project-group" data-project-group="working">
+      <div class="project-group-head">
+        <h3 data-i18n data-ru="В работе" data-en="In progress">В работе</h3>
+        <span data-i18n data-ru="5 проектов · сейчас" data-en="5 projects · now">5 проектов · сейчас</span>
       </div>
-      <div class="proj-card">
-        <h3>Русский Лайнап</h3>
-        <p data-i18n data-ru="Электросёрф-бренд — проект для души. Собираю с нуля как хобби: продукт, магазин, комьюнити." data-en="An electric-surf brand — my passion project. Building it from scratch as a hobby: product, shop, community.">Электросёрф-бренд — проект для души. Собираю с нуля как хобби: продукт, магазин, комьюнити.</p>
-        <a href="https://russianlineup.ru" target="_blank" rel="noopener" data-i18n data-ru="russianlineup.ru →" data-en="russianlineup.ru →">russianlineup.ru →</a>
+      <div class="proj proj-working">
+        <article class="proj-card client-work" data-project="ksy-store">
+          <span class="project-badge" data-i18n data-ru="Заказная разработка" data-en="Custom development">Заказная разработка</span>
+          <h3>KSY Store</h3>
+          <p data-i18n data-ru="Клиентский сервис моей студии: находит скидки PlayStation Store и автоматически публикует подборки в Telegram." data-en="A client service from my studio: finds PlayStation Store discounts and automatically publishes curated deals to Telegram.">Клиентский сервис моей студии: находит скидки PlayStation Store и автоматически публикует подборки в Telegram.</p>
+        </article>
+        <article class="proj-card" data-project="gopro-wifi-viewer">
+          <span class="project-badge" data-i18n data-ru="В работе" data-en="In progress">В работе</span>
+          <h3>GoProWifiViewer</h3>
+          <p data-i18n data-ru="Редизайн приложения для просмотра и управления GoPro по Wi‑Fi." data-en="Redesigning an app for viewing and controlling a GoPro over Wi-Fi.">Редизайн приложения для просмотра и управления GoPro по Wi‑Fi.</p>
+        </article>
+        <article class="proj-card" data-project="imvu-profit">
+          <span class="project-badge" data-i18n data-ru="В работе" data-en="In progress">В работе</span>
+          <h3>ImvuProfit и ко</h3>
+          <p data-i18n data-ru="Набор продуктов для американских IMVU-креаторов: инструменты роста и монетизации." data-en="A suite of products for US-based IMVU creators: tools for growth and monetization.">Набор продуктов для американских IMVU-креаторов: инструменты роста и монетизации.</p>
+        </article>
+        <article class="proj-card" data-project="arbiterra">
+          <span class="project-badge" data-i18n data-ru="В работе" data-en="In progress">В работе</span>
+          <h3>Arbiterra</h3>
+          <p data-i18n data-ru="Обновляю криптовалютного торгового бота — наследие одного из первых моих проектов, Deepforks." data-en="Updating a crypto trading bot — a legacy of Deepforks, one of my earliest projects.">Обновляю криптовалютного торгового бота — наследие одного из первых моих проектов, Deepforks.</p>
+        </article>
+        <article class="proj-card" data-project="lead-intelligence">
+          <span class="project-badge" data-i18n data-ru="В работе" data-en="In progress">В работе</span>
+          <h3>Lead Intelligence</h3>
+          <p data-i18n data-ru="Поиск компаний и ЛПР по открытым данным с персональными обращениями через LinkedIn." data-en="Finding companies and decision-makers from public data, with personalized outreach via LinkedIn.">Поиск компаний и ЛПР по открытым данным с персональными обращениями через LinkedIn.</p>
+        </article>
       </div>
-      <div class="proj-card dashed">
-        <h3 data-i18n data-ru="Следующий проект" data-en="Next project">Следующий проект</h3>
-        <p data-i18n data-ru="Здесь появится следующее, что я запущу. Следи за процессом в шоу и Telegram." data-en="Whatever I ship next lands here. Follow along in the show and on Telegram.">Здесь появится следующее, что я запущу. Следи за процессом в шоу и Telegram.</p>
-        <a href="#build" data-i18n data-ru="Следить →" data-en="Follow →">Следить →</a>
+    </div>
+
+    <div class="project-group" data-project-group="launched">
+      <div class="project-group-head">
+        <h3 data-i18n data-ru="Запущено" data-en="Launched">Запущено</h3>
+        <span data-i18n data-ru="2 продукта · в проде" data-en="2 products · live">2 продукта · в проде</span>
+      </div>
+      <div class="proj proj-launched">
+        <article class="proj-card">
+          <h3>Vezdepost</h3>
+          <p data-i18n data-ru="Open-source планировщик публикаций: один пост — сразу в Telegram, MAX, VK, X и ещё 30+ платформ, по расписанию, с календарём и аналитикой. AI-developed форк Postiz, развиваю с помощью Claude Code: русский интерфейс, российские платформы, хостинг в РФ. Облако сейчас бесплатно, self-host — бесплатен всегда." data-en="An open-source post scheduler: one post goes to Telegram, MAX, VK, X and 30+ more platforms — scheduled, with a calendar and analytics. An AI-developed Postiz fork I grow with Claude Code: Russian UI, Russian platforms, hosting in Russia. Cloud is free for now, self-host is free forever.">Open-source планировщик публикаций: один пост — сразу в Telegram, MAX, VK, X и ещё 30+ платформ, по расписанию, с календарём и аналитикой. AI-developed форк Postiz, развиваю с помощью Claude Code: русский интерфейс, российские платформы, хостинг в РФ. Облако сейчас бесплатно, self-host — бесплатен всегда.</p>
+          <div class="links">
+            <a href="https://vezdepost.ru" target="_blank" rel="noopener">vezdepost.ru →</a>
+            <a href="https://github.com/FedrBodr/vezdepost" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </article>
+        <article class="proj-card">
+          <h3>Русский Лайнап</h3>
+          <p data-i18n data-ru="Электросёрф-бренд — проект для души. Собираю с нуля как хобби: продукт, магазин, комьюнити." data-en="An electric-surf brand — my passion project. Building it from scratch as a hobby: product, shop, community.">Электросёрф-бренд — проект для души. Собираю с нуля как хобби: продукт, магазин, комьюнити.</p>
+          <a href="https://russianlineup.ru" target="_blank" rel="noopener" data-i18n data-ru="russianlineup.ru →" data-en="russianlineup.ru →">russianlineup.ru →</a>
+        </article>
       </div>
     </div>
   </div>
