@@ -24,7 +24,18 @@
 <meta name="twitter:title" data-i18n-attr="content" data-ru="Дмитрий Федоренко (FedrBodr) — IT-продукты от 0 до прода за несколько дней" data-en="Dmitry Fedorenko (FedrBodr) — IT products from idea to production in days" content="Дмитрий Федоренко (FedrBodr) — IT-продукты от 0 до прода за несколько дней" />
 <meta name="twitter:description" data-i18n-attr="content" data-ru="IT-фаундер. Разработка MVP от недели. Строю свои продукты вслух — весь путь 0-to-prod без монтажа." data-en="IT founder. MVP development from one week. Building products in public — the complete 0-to-prod journey." content="IT-фаундер. Разработка MVP от недели. Строю свои продукты вслух — весь путь 0-to-prod без монтажа." />
 
-<meta name="theme-color" content="#0039A6" />
+<meta name="theme-color" content="#0b1110" />
+<script id="theme-bootstrap">
+(function(){
+  var STORAGE_KEY = 'fedrbodr.theme';
+  var theme = 'dark';
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === 'dark' || saved === 'light') theme = saved;
+  } catch (_) {}
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
 <!-- Inline SVG favicon: wave in brand blue -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230039A6'/%3E%3Cpath d='M8 62c12 0 12-14 24-14s12 14 24 14 12-14 24-14 12 14 12 14' fill='none' stroke='%237EC8E3' stroke-width='8' stroke-linecap='round'/%3E%3Ctext x='50' y='42' font-family='Arial,Helvetica,sans-serif' font-size='40' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -67,16 +78,40 @@
 
 <style>
   :root{
-    --blue:#0039A6;
-    --sky:#7EC8E3;
-    --red:#D52B1E;
-    --ink:#0e1726;
-    --muted:#5a6473;
-    --bg:#f7f8fa;
-    --card:#ffffff;
-    --line:#e6e9ef;
+    color-scheme:dark;
+    --blue:#80d1ae;
+    --sky:#9dd6bb;
+    --red:#f2b84b;
+    --ink:#f2f4ee;
+    --muted:#9fb0a9;
+    --bg:#0b1110;
+    --card:#121c19;
+    --line:#294037;
+    --header:rgba(11,17,16,.88);
+    --soft:#18241f;
+    --soft-2:#101714;
+    --on-accent:#08110d;
+    --accent-shadow:rgba(128,209,174,.22);
+    --special-shadow:rgba(242,184,75,.22);
     --radius:18px;
     --maxw:960px;
+  }
+  :root[data-theme="light"]{
+    color-scheme:light;
+    --blue:#287a59;
+    --sky:#3f8065;
+    --red:#9a6500;
+    --ink:#13201b;
+    --muted:#5e6e66;
+    --bg:#f4f7f5;
+    --card:#ffffff;
+    --line:#d7e1dc;
+    --header:rgba(244,247,245,.9);
+    --soft:#e8f0ec;
+    --soft-2:#edf3f0;
+    --on-accent:#ffffff;
+    --accent-shadow:rgba(40,122,89,.18);
+    --special-shadow:rgba(154,101,0,.18);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -98,7 +133,7 @@
   .lead{color:var(--muted);font-size:17px;max-width:640px}
 
   /* Header */
-  header{position:sticky;top:0;z-index:50;background:rgba(247,248,250,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:50;background:var(--header);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
   .brand{font-family:"Unbounded",sans-serif;font-weight:700;letter-spacing:-.01em;font-size:16px;display:flex;align-items:center;gap:10px}
   .brand-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--red);flex:none}
@@ -107,8 +142,12 @@
   .nav-links a:hover{color:var(--ink)}
   .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
   .lang button{border:0;background:transparent;padding:6px 12px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
-  .lang button.active{background:var(--blue);color:#fff}
-  @media(max-width:820px){.nav-links a:not(.lang-wrap){display:none}}
+  .lang button.active{background:var(--blue);color:var(--on-accent)}
+  .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--ink);font-size:16px;cursor:pointer}
+  @media(max-width:820px){
+    .nav-links{gap:10px}
+    .nav-links a:not(.lang-wrap){display:none}
+  }
 
   /* Hero */
   .hero{padding:64px 0 56px;position:relative;overflow:hidden}
@@ -122,11 +161,11 @@
   .portrait-wrap{justify-self:center;position:relative;transform:rotate(2deg)}
   .portrait{display:block;width:min(300px,72vw);aspect-ratio:3/4.4;object-fit:cover;object-position:58% 22%;
     border-radius:999px;outline:3px solid var(--red);outline-offset:9px;
-    box-shadow:0 24px 60px rgba(0,57,166,.22)}
+    box-shadow:0 24px 60px var(--accent-shadow)}
   .portrait-tag{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%) rotate(-2deg);white-space:nowrap;
     font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;color:var(--blue);
     background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
-    box-shadow:0 4px 14px rgba(14,23,38,.08)}
+    box-shadow:0 4px 14px rgba(0,0,0,.18)}
   @media(max-width:760px){
     .hero-grid{grid-template-columns:1fr}
     .portrait-wrap{order:-1;margin-bottom:18px}
@@ -145,10 +184,10 @@
   @keyframes rise-tilt{from{opacity:0;transform:rotate(2deg) translateY(14px)}to{opacity:1;transform:rotate(2deg) translateY(0)}}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .12s ease,box-shadow .12s ease;cursor:pointer;border:1px solid transparent}
   .btn:hover{transform:translateY(-1px)}
-  .btn-primary{background:var(--red);color:#fff;box-shadow:0 6px 18px rgba(213,43,30,.28)}
+  .btn-primary{background:var(--red);color:var(--on-accent);box-shadow:0 6px 18px var(--special-shadow)}
   .btn-ghost{background:var(--card);border-color:var(--line);color:var(--ink)}
   .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-  .chip{font-size:13px;color:var(--blue);background:rgba(126,200,227,.18);border:1px solid rgba(126,200,227,.5);padding:6px 12px;border-radius:999px;font-weight:600}
+  .chip{font-size:13px;color:var(--blue);background:var(--soft);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-weight:600}
   .wave{display:block;width:100%;height:40px;color:var(--sky)}
 
   /* About */
@@ -186,16 +225,16 @@
   .proj-card .links{display:flex;flex-wrap:wrap;gap:16px}
 
   /* Contact */
-  .contact-box{margin-top:22px;background:linear-gradient(135deg,var(--blue),#0a4fd0);color:#fff;border-radius:22px;padding:34px}
+  .contact-box{margin-top:22px;background:linear-gradient(135deg,#1f644b,#174633);color:#fff;border-radius:22px;padding:34px}
   .contact-box h2{color:#fff}
   .contact-box p{color:rgba(255,255,255,.85);max-width:48ch;margin-top:6px}
   .contact-box .btn{margin-top:20px;margin-right:10px}
 
   /* Order / work-with-me */
-  .order{background:linear-gradient(180deg,#ffffff,#eef3fb)}
+  .order{background:linear-gradient(180deg,var(--bg),var(--soft-2))}
   .order .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:26px 0}
   .order .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .order .step-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:17px;margin-bottom:12px}
+  .order .step-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--blue);color:var(--on-accent);font-weight:800;font-size:17px;margin-bottom:12px}
   .order .step h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
   .order .step p{color:var(--muted);font-size:14px}
   .order .fineprint{color:var(--muted);font-size:13px;margin-top:14px}
@@ -228,6 +267,7 @@
       <a href="#order" data-i18n data-ru="Разработка" data-en="Development">Разработка</a>
       <a href="#experience" data-i18n data-ru="Опыт" data-en="Track record">Опыт</a>
       <a href="#contact" data-i18n data-ru="Контакт" data-en="Contact">Контакт</a>
+      <button type="button" class="theme-toggle" data-i18n-attr="aria-label" data-ru="Переключить тему" data-en="Toggle theme" aria-label="Переключить тему" aria-pressed="true"><span aria-hidden="true">☀</span></button>
       <span class="lang-wrap lang" role="group" data-i18n-attr="aria-label" data-ru="Язык" data-en="Language" aria-label="Язык">
         <button type="button" data-lang="ru" class="active" aria-pressed="true">RU</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -417,6 +457,34 @@
     <div data-i18n data-ru="© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух." data-en="© 2026 Dmitry Fedorenko (FedrBodr). Built in public.">© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух.</div>
   </div>
 </footer>
+
+<script id="theme-switcher">
+(function(){
+  var STORAGE_KEY = 'fedrbodr.theme';
+  var button = document.querySelector('.theme-toggle');
+  var themeColor = document.querySelector('meta[name="theme-color"]');
+
+  function currentTheme(){
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
+  function render(){
+    var dark = currentTheme() === 'dark';
+    button.setAttribute('aria-pressed', String(dark));
+    button.querySelector('span').textContent = dark ? '☀' : '☾';
+    themeColor.setAttribute('content', dark ? '#0b1110' : '#f4f7f5');
+  }
+
+  button.addEventListener('click', function(){
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (_) {}
+    render();
+  });
+
+  render();
+})();
+</script>
 
 <script id="language-switcher">
 (function(){

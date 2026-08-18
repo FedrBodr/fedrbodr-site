@@ -10,3 +10,6 @@ photo_2024-08-19_17-14-57.jpg
 
 # Локальные рабочие деревья Codex
 .tmp/
+
+# Локальные макеты visual companion
+.superpowers/
