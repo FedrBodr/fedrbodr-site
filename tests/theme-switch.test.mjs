@@ -66,7 +66,7 @@ test('theme bootstrap appears before styles and defaults to dark', () => {
   const page = load();
   assert.equal(page.documentElement.getAttribute('data-theme'), 'dark');
   assert.equal(page.button.getAttribute('aria-pressed'), 'true');
-  assert.equal(page.meta.getAttribute('content'), '#0b1110');
+  assert.equal(page.meta.getAttribute('content'), '#0a0a0a');
   assert.deepEqual(page.localStorage.writes, []);
 });
 
@@ -81,7 +81,7 @@ test('button toggles theme, button state, browser color, and storage', () => {
   page.button.click();
   assert.equal(page.documentElement.getAttribute('data-theme'), 'light');
   assert.equal(page.button.getAttribute('aria-pressed'), 'false');
-  assert.equal(page.meta.getAttribute('content'), '#f4f7f5');
+  assert.equal(page.meta.getAttribute('content'), '#f6f6f7');
   assert.deepEqual(page.localStorage.writes, [['fedrbodr.theme', 'light']]);
   page.button.click();
   assert.equal(page.documentElement.getAttribute('data-theme'), 'dark');

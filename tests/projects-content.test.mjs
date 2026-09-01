@@ -15,8 +15,8 @@ function section(name) {
 }
 
 test('current projects exist in the agreed order', () => {
-  const expected = ['ksy-store', 'gopro-wifi-viewer', 'imvu-profit', 'arbiterra', 'lead-intelligence'];
-  const actual = [...html.matchAll(/data-project="([^"]+)"/g)].map((match) => match[1]).slice(0, 5);
+  const expected = ['ksy-store', 'gopro-wifi-viewer', 'imvu-profit', 'marcel-lior'];
+  const actual = [...html.matchAll(/data-project="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(actual, expected);
 });
 
@@ -31,9 +31,7 @@ test('all agreed current-project descriptions are bilingual', () => {
   const required = [
     'Клиентский сервис моей студии',
     'Редизайн приложения для просмотра и управления GoPro',
-    'Набор продуктов для американских IMVU-креаторов',
-    'наследие одного из первых моих проектов, Deepforks',
-    'Поиск компаний и ЛПР по открытым данным'
+    'Набор продуктов для IMVU-креаторов'
   ];
   for (const text of required) assert.ok(html.includes(text), `missing Russian copy: ${text}`);
   for (const card of html.matchAll(/<article class="proj-card[^>]*data-project="[^"]+">([\s\S]*?)<\/article>/g)) {
@@ -42,13 +40,21 @@ test('all agreed current-project descriptions are bilingual', () => {
   }
 });
 
-test('launched group keeps both existing products and links', () => {
+test('removed projects are gone from the working group', () => {
+  const working = section('working');
+  assert.doesNotMatch(working, />Arbiterra</);
+  assert.doesNotMatch(working, />Lead Intelligence</);
+});
+
+test('launched group keeps Vezdepost and Marcel Lior with their links', () => {
   const launched = section('launched');
   assert.match(launched, />Vezdepost</);
-  assert.match(launched, />Русский Лайнап</);
   assert.match(launched, /https:\/\/vezdepost\.ru/);
   assert.match(launched, /https:\/\/github\.com\/FedrBodr\/vezdepost/);
-  assert.match(launched, /https:\/\/russianlineup\.ru/);
+  assert.match(launched, />Marcel Lior</);
+  assert.match(launched, /https:\/\/marcellior\.com\//);
+  assert.doesNotMatch(launched, />Русский Лайнап</);
+  assert.doesNotMatch(launched, /russianlineup\.ru/);
 });
 
 test('placeholder project is removed', () => {
