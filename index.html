@@ -226,6 +226,14 @@
   .proj-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
   .proj-card::after{content:"";position:absolute;top:10px;right:10px;width:14px;height:14px;border-top:2px solid var(--blue);border-right:2px solid var(--blue);opacity:.55;pointer-events:none}
   .proj-card:hover{border-color:var(--blue);box-shadow:0 14px 34px var(--accent-shadow);transform:translateY(-2px)}
+  .dir-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:26px 0}
+  .dir-card{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;color:var(--ink);text-decoration:none;position:relative;overflow:hidden;transition:border-color .18s,box-shadow .18s,transform .18s}
+  .dir-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
+  .dir-card:hover{border-color:var(--blue);box-shadow:0 14px 34px var(--accent-shadow);transform:translateY(-2px)}
+  .dir-badge{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700;color:var(--blue)}
+  .dir-card h3{margin:0;font-size:1.15rem}
+  .dir-card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55}
+  .dir-cta{margin-top:auto;font-weight:700;color:var(--blue)}
   .proj-card.client-work{border-color:var(--red);box-shadow:0 10px 30px var(--special-shadow)}
   .proj-card.client-work::before{background:var(--red)}
   .proj-card.client-work::after{border-color:var(--red)}
@@ -313,6 +321,7 @@
       <a href="#build" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</a>
       <a href="#projects" data-i18n data-ru="Проекты" data-en="Projects">Проекты</a>
       <a href="#order" data-i18n data-ru="Разработка" data-en="Development">Разработка</a>
+      <a href="/prostranstvo/" data-i18n data-ru="3D-карты" data-en="3D maps">3D-карты</a>
       <a href="#experience" data-i18n data-ru="Опыт" data-en="Track record">Опыт</a>
       <a href="#contact" data-i18n data-ru="Контакт" data-en="Contact">Контакт</a>
       <button type="button" class="theme-toggle" data-i18n-attr="aria-label" data-ru="Переключить тему" data-en="Toggle theme" aria-label="Переключить тему" aria-pressed="true"><span aria-hidden="true">☀</span></button>
@@ -351,6 +360,28 @@
   </div>
 </div>
 <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 150 40, 300 0, 450 20 S 750 40, 900 20 S 1200 0, 1200 20 L1200 40 L0 40 Z" fill="currentColor" opacity="0.35"/></svg>
+
+<!-- DIRECTIONS -->
+<section id="directions" class="directions">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n data-ru="Направления" data-en="Services">Направления</p>
+    <h2 data-i18n data-ru="Два направления услуг" data-en="Two service lines">Два направления услуг</h2>
+    <div class="dir-grid">
+      <a class="dir-card" href="#assistant">
+        <span class="dir-badge" data-i18n data-ru="Автоматизация" data-en="Automation">Автоматизация</span>
+        <h3 data-i18n data-ru="AI-разбор процесса" data-en="AI process analysis">AI-разбор процесса</h3>
+        <p data-i18n data-ru="Опишите рутину текстом или голосом — живой ассистент задаст уточняющие вопросы и покажет, что автоматизировать, а что оставить человеку. Разбор сразу, заявка мне лично." data-en="Describe the routine by text or voice — a live assistant asks a couple of questions and shows what to automate and what to keep human. Instant analysis, the request reaches me personally.">Опишите рутину текстом или голосом — живой ассистент задаст уточняющие вопросы и покажет, что автоматизировать, а что оставить человеку. Разбор сразу, заявка мне лично.</p>
+        <span class="dir-cta" data-i18n data-ru="Попробовать разбор →" data-en="Try the analysis →">Попробовать разбор →</span>
+      </a>
+      <a class="dir-card" href="/prostranstvo/">
+        <span class="dir-badge" data-i18n data-ru="3D" data-en="3D">3D</span>
+        <h3 data-i18n data-ru="3D-карты пространств" data-en="3D venue maps">3D-карты пространств</h3>
+        <p data-i18n data-ru="Площадка до стройки — интерактивная карта по ссылке: ракурсы, день и ночь, подписи к объектам. Формат продаётся от 5 000 ₽, кейс «Батарея» открыт публично." data-en="The venue before it is built — an interactive map behind a link: angles, day and night, object labels. The format sells from ₽5,000, the Batareya case is public.">Площадка до стройки — интерактивная карта по ссылке: ракурсы, день и ночь, подписи к объектам. Формат продаётся от 5 000 ₽, кейс «Батарея» открыт публично.</p>
+        <span class="dir-cta" data-i18n data-ru="Смотреть формат →" data-en="See the format →">Смотреть формат →</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ORDER / WORK WITH ME -->
 <section id="order" class="order">
