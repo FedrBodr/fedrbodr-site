@@ -15,21 +15,21 @@ function section(name) {
 }
 
 test('current projects exist in the agreed order', () => {
-  const expected = ['ksy-store', 'gopro-wifi-viewer', 'imvu-profit', 'marcel-lior'];
+  const expected = ['gopro-wifi-viewer', 'imvu-profit', 'marcel-lior'];
   const actual = [...html.matchAll(/data-project="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(actual, expected);
 });
 
-test('KSY Store is first and exclusively marked as custom development', () => {
-  const ksy = html.match(/<article class="proj-card client-work" data-project="ksy-store">([\s\S]*?)<\/article>/)?.[1] || '';
-  assert.match(ksy, /data-ru="Заказная разработка"/);
-  assert.match(ksy, /data-en="Custom development"/);
-  assert.doesNotMatch(ksy, /data-ru="В работе"/);
+test('KSY moved to cases and is out of the projects group', () => {
+  const working = section('working');
+  assert.doesNotMatch(working, /data-project="ksy-store"/);
+  assert.doesNotMatch(working, /Заказная разработка/);
+  const cases = html.slice(html.indexOf('<section id="cases"'), html.indexOf('</section>', html.indexOf('<section id="cases"')));
+  assert.match(cases, /data-case="ksy"/);
 });
 
 test('all agreed current-project descriptions are bilingual', () => {
   const required = [
-    'Клиентский сервис моей студии',
     'Редизайн приложения для просмотра и управления GoPro',
     'Набор продуктов для IMVU-креаторов'
   ];

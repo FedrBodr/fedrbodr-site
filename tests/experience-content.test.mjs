@@ -6,8 +6,8 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const experience = html.match(/<section id="experience">([\s\S]*?)<\/section>/)?.[1] || '';
 
 test('experience section leads with results in both languages', () => {
-  assert.match(experience, /data-ru="15\+ лет: от банковских транзакций до собственных AI-продуктов"/);
-  assert.match(experience, /data-en="15\+ years: from banking transactions to my own AI products"/);
+  assert.match(experience, /data-ru="20\+ лет: от банковских транзакций до собственных AI-продуктов"/);
+  assert.match(experience, /data-en="20\+ years: from banking transactions to my own AI products"/);
   assert.match(experience, /ежедневного потока транзакций по всей стране/);
   assert.match(experience, /daily nationwide transaction flow/);
 });
@@ -26,8 +26,8 @@ test('experience credentials contain concrete bilingual proof points', () => {
 });
 
 test('experience section names current shipped outcomes without unsupported metrics', () => {
-  for (const result of ['Vezdepost', 'AhMiranami', 'KSY Store', 'Marcel Lior']) {
+  for (const result of ['Vezdepost', 'KSY Deals работает в проде', 'пилот принят и оплачен', 'Marcel Lior']) {
     assert.match(experience, new RegExp(result));
   }
-  assert.doesNotMatch(experience, /million tokens|миллион(?:а|ов)? токенов|552 tests|552 теста/);
+  assert.doesNotMatch(experience, /million tokens|миллион(?:а|ов)? токенов|552 tests|552 теста|AhMiranami приносит доход|KSY Store/);
 });
