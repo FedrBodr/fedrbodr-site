@@ -253,21 +253,24 @@
 
   /* Order / work-with-me */
   .order{background:linear-gradient(180deg,var(--bg),var(--soft-2))}
-  .order .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:26px 0}
-  .order .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .order .step-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--blue);color:var(--on-accent);font-weight:800;font-size:17px;margin-bottom:12px}
-  .order .step h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
-  .order .step p{color:var(--muted);font-size:14px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:26px 0}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .step-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--blue);color:var(--on-accent);font-weight:800;font-size:17px;margin-bottom:12px}
+  .step h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
+  .step p{color:var(--muted);font-size:14px}
   .order .fineprint{color:var(--muted);font-size:13px;margin-top:14px}
   /* AI assistant wizard */
-  .wizard{margin-top:18px;display:grid;gap:14px;max-width:640px}
+  .wizard{margin-top:22px;display:grid;gap:14px;max-width:680px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 0 0 1px rgba(0,240,214,.05),0 16px 40px rgba(0,0,0,.25)}
   .wizard-step.hidden,#assistant-status.hidden,.assistant-float.hidden{display:none}
   .wizard .wizard-label{display:block;font-size:14px;margin-bottom:8px}
   #assistant-input{width:100%;background:var(--soft-2);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;font:inherit;resize:vertical}
   #assistant-input:focus{outline:2px solid var(--blue);outline-offset:1px}
-  .wizard-consent{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted)}
+  .wizard-consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.55;color:var(--muted)}
+  .wizard-consent input[type="checkbox"]{margin-top:3px;flex:none;accent-color:var(--blue)}
   .wizard-consent a{color:var(--sky)}
   .wizard-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  #assistant-voice.recording{box-shadow:0 0 0 2px var(--red)}
+  .wizard-voice-hint{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
   .wizard-hint{font-size:12px;color:var(--muted)}
   .wizard-q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
   .wizard-q>p{margin-bottom:10px}
@@ -369,7 +372,7 @@
       <div class="step direction-card">
         <span class="step-n">3</span>
         <h3 data-i18n data-ru="Автоматизация процессов" data-en="Process automation">Автоматизация процессов</h3>
-        <p data-i18n data-ru="Собираю ручные операции в контур: CRM, Telegram, таблицы, email, AI по заданным правилам. Как KSY Deals: от полутора часов рутины — до одной кнопки." data-en="I turn manual operations into one loop: CRM, Telegram, spreadsheets, email, AI within set rules. Like KSY Deals: from 1.5 hours of routine to one button.">Собираю ручные операции в контур: CRM, Telegram, таблицы, email, AI по заданным правилам. Как KSY Deals: от полутора часов рутины — до одной кнопки.</p>
+        <p data-i18n data-ru="Собираю ручные операции в контур: CRM, Telegram, MAX, таблицы, email, AI по заданным правилам. Как KSY Deals: от полутора часов рутины — до одной кнопки." data-en="I turn manual operations into one loop: CRM, Telegram, MAX, spreadsheets, email, AI within set rules. Like KSY Deals: from 1.5 hours of routine to one button.">Собираю ручные операции в контур: CRM, Telegram, MAX, таблицы, email, AI по заданным правилам. Как KSY Deals: от полутора часов рутины — до одной кнопки.</p>
       </div>
     </div>
     <a href="https://t.me/FedrBodr" target="_blank" rel="noopener" class="btn btn-primary" data-i18n data-ru="Обсудить задачу в Telegram" data-en="Discuss your task on Telegram">Обсудить задачу в Telegram</a>
@@ -404,6 +407,15 @@
         <h3 data-i18n data-ru="Клиентский пилот без названия" data-en="Unnamed client pilot">Клиентский пилот без названия</h3>
         <p data-i18n data-ru="Задача: заказчику нужен был работающий первый этап продукта. Решение: диагностика, узкий скоуп, реализация и передача. Результат: этап принят заказчиком и полностью оплачен." data-en="Task: the client needed a working first stage of their product. Solution: diagnosis, a narrow scope, implementation and handover. Result: the stage was accepted and fully paid.">Задача: заказчику нужен был работающий первый этап продукта. Решение: диагностика, узкий скоуп, реализация и передача. Результат: этап принят заказчиком и полностью оплачен.</p>
       </article>
+      <article class="proj-card case-card" data-case="prostranstvo">
+        <span class="project-badge" data-i18n data-ru="Собственный продукт · 3D" data-en="Own product · 3D">Собственный продукт · 3D</span>
+        <h3 data-i18n data-ru="«Пространство» — интерактивные 3D-карты площадок" data-en="Prostranstvo — interactive 3D venue maps">«Пространство» — интерактивные 3D-карты площадок</h3>
+        <p data-i18n data-ru="Задача: показать площадку до стройки — спонсорам, команде и гостям, без приложений и папок с рендерами. Решение: собственный формат — трёхмерная карта по ссылке: вращение, ракурсы, день и ночь, подписи к объектам; геометрия сжимается под мобильный интернет. Результат: живой пример «Батарея» открыт публично — 129 504 треугольника весят 1,3 МБ вместо 8,2; формат продаётся от 5 000 ₽ за мини-пространство." data-en="Task: show a venue before it is built — to sponsors, crew and guests, with no apps or render folders. Solution: our own format — a 3D map behind a link: rotation, camera angles, day and night, object labels; geometry compressed for mobile internet. Result: the live Batareya demo is public — 129,504 triangles at 1.3 MB instead of 8.2; the format sells from 5,000 ₽ for a mini-space.">Задача: показать площадку до стройки — спонсорам, команде и гостям, без приложений и папок с рендерами. Решение: собственный формат — трёхмерная карта по ссылке: вращение, ракурсы, день и ночь, подписи к объектам; геометрия сжимается под мобильный интернет. Результат: живой пример «Батарея» открыт публично — 129 504 треугольника весят 1,3 МБ вместо 8,2; формат продаётся от 5 000 ₽ за мини-пространство.</p>
+        <div class="links">
+          <a href="https://fedrbodr.com/prostranstvo/" target="_blank" rel="noopener">prostranstvo →</a>
+          <a href="https://fedrbodr.com/batareya/" target="_blank" rel="noopener">«Батарея» →</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -431,7 +443,7 @@
     <p class="eyebrow" data-i18n data-ru="История" data-en="Story">История</p>
     <h2 data-i18n data-ru="Из корпоративной разработки в собственные IT-продукты" data-en="From corporate engineering to my own IT products">Из корпоративной разработки в собственные IT-продукты</h2>
     <div class="about-grid">
-      <p data-i18n data-ru="Днём я инженер. Годами строил чужие продукты внутри корпоративной системы, а когда выгорал, уходил делать своё. Так появилась серия попыток: <strong>BroKey</strong>, <strong><a href='https://github.com/FedrBodr/exchange-arbitr' target='_blank' rel='noopener'>DeepForks</a></strong>, <strong><a href='https://author.polyglot.moscow' target='_blank' rel='noopener'>Polyglot</a></strong>. Сейчас главный фокус, собственные IT-продукты, которые довожу от идеи до прода за несколько дней. Свежий из них: <strong><a href='https://vezdepost.ru/' target='_blank' rel='noopener'>Vezdepost</a></strong>, open-source планировщик постов для 30+ платформ." data-en="By day I'm an engineer. For years I built other people's products inside the corporate machine, and whenever I burned out, I'd go build my own. That turned into a series of attempts: <strong>BroKey</strong>, <strong><a href='https://github.com/FedrBodr/exchange-arbitr' target='_blank' rel='noopener'>DeepForks</a></strong>, <strong><a href='https://author.polyglot.moscow' target='_blank' rel='noopener'>Polyglot</a></strong>. Today my main focus is my own IT products, shipped from idea to production in a few days. The latest is <strong><a href='https://vezdepost.ru/' target='_blank' rel='noopener'>Vezdepost</a></strong>, an open-source post scheduler for 30+ platforms.">Днём я инженер. Годами строил чужие продукты внутри корпоративной системы, а когда выгорал, уходил делать своё. Так появилась серия попыток: <strong>BroKey</strong>, <strong><a href="https://github.com/FedrBodr/exchange-arbitr" target="_blank" rel="noopener">DeepForks</a></strong>, <strong><a href="https://author.polyglot.moscow" target="_blank" rel="noopener">Polyglot</a></strong>. Сейчас главный фокус, собственные IT-продукты, которые довожу от идеи до прода за несколько дней. Свежий из них: <strong><a href="https://vezdepost.ru/" target="_blank" rel="noopener">Vezdepost</a></strong>, open-source планировщик постов для 30+ платформ.</p>
+      <p data-i18n data-ru="Днём я инженер. Годами строил чужие продукты внутри корпоративной системы, а когда выгорал, уходил делать своё. Так появилась серия попыток: <strong>BroKey</strong>, <strong><a href='https://github.com/FedrBodr/exchange-arbitr' target='_blank' rel='noopener'>DeepForks</a></strong>, <strong><a href='https://author.polyglot.moscow' target='_blank' rel='noopener'>Polyglot</a></strong>. Сейчас главный фокус — собственные IT-продукты, которые довожу от идеи до прода за несколько недель. Свежий из них: <strong><a href='https://vezdepost.ru/' target='_blank' rel='noopener'>Vezdepost</a></strong>, open-source планировщик постов для 30+ платформ." data-en="By day I'm an engineer. For years I built other people's products inside the corporate machine, and whenever I burned out, I'd go build my own. That turned into a series of attempts: <strong>BroKey</strong>, <strong><a href='https://github.com/FedrBodr/exchange-arbitr' target='_blank' rel='noopener'>DeepForks</a></strong>, <strong><a href='https://author.polyglot.moscow' target='_blank' rel='noopener'>Polyglot</a></strong>. Today my main focus is my own IT products, shipped from idea to production in a few weeks. The latest is <strong><a href='https://vezdepost.ru/' target='_blank' rel='noopener'>Vezdepost</a></strong>, an open-source post scheduler for 30+ platforms.">Днём я инженер. Годами строил чужие продукты внутри корпоративной системы, а когда выгорал, уходил делать своё. Так появилась серия попыток: <strong>BroKey</strong>, <strong><a href="https://github.com/FedrBodr/exchange-arbitr" target="_blank" rel="noopener">DeepForks</a></strong>, <strong><a href="https://author.polyglot.moscow" target="_blank" rel="noopener">Polyglot</a></strong>. Сейчас главный фокус — собственные IT-продукты, которые довожу от идеи до прода за несколько недель. Свежий из них: <strong><a href="https://vezdepost.ru/" target="_blank" rel="noopener">Vezdepost</a></strong>, open-source планировщик постов для 30+ платформ.</p>
       <p data-i18n data-ru="Делаю это открыто, в формате build-in-public: не блог про «успех», а журнал экспериментов. Каждый шаг, код, продукт, маркетинг, цифры, на виду. Совмещаю работу на постоянке с проектами благодаря ИИ. А для души: <strong>«Русский Лайнап»</strong>, электросёрф-бренд, который собираю с нуля как хобби." data-en="I do it openly, build-in-public style: not a success blog, but a lab journal. Every step, code, product, marketing, numbers, is out in the open. I juggle a full-time job with my projects thanks to AI. And for the soul: <strong>Russian Lineup</strong>, an electric-surf brand I'm building from scratch as a hobby.">Делаю это открыто, в формате build-in-public: не блог про «успех», а журнал экспериментов. Каждый шаг, код, продукт, маркетинг, цифры, на виду. Совмещаю работу на постоянке с проектами благодаря ИИ. А для души: <strong>«Русский Лайнап»</strong>, электросёрф-бренд, который собираю с нуля как хобби.</p>
     </div>
   </div>
@@ -505,10 +517,12 @@
         <textarea id="assistant-input" rows="4" maxlength="4000" placeholder="Например: каждый день собираю отчёт из трёх таблиц и рассылаю менеджерам…" data-i18n-attr="placeholder" data-ru="Например: каждый день собираю отчёт из трёх таблиц и рассылаю менеджерам…" data-en="For example: every day I compile a report from three spreadsheets and email it to managers…"></textarea>
         <label class="wizard-consent">
           <input type="checkbox" id="assistant-consent" />
-          <span data-i18n data-ru='Я даю согласие на обработку описания и ответов (текст передаётся в Z.AI, Сингапур). <a href="https://studio.fedrbodr.com/consent/diagnostic" target="_blank" rel="noopener">Условия согласия</a>' data-en='I consent to processing of my description and answers (text is sent to Z.AI, Singapore). <a href="https://studio.fedrbodr.com/consent/diagnostic" target="_blank" rel="noopener">Consent terms</a>'>Я даю согласие на обработку описания и ответов (текст передаётся в Z.AI, Сингапур). <a href="https://studio.fedrbodr.com/consent/diagnostic" target="_blank" rel="noopener">Условия согласия</a></span>
+          <span data-i18n data-ru='Я даю согласие на обработку описания, ответов и аудио (аудио — на нашем сервере в РФ, текст — в Z.AI, Сингапур). <a href="https://studio.fedrbodr.com/consent/diagnostic" target="_blank" rel="noopener">Условия согласия</a>' data-en='I consent to processing of my description, answers and audio (audio on our server in Russia, text via Z.AI, Singapore). <a href="https://studio.fedrbodr.com/consent/diagnostic" target="_blank" rel="noopener">Consent terms</a>'>Я даю согласие на обработку описания, ответов и аудио (аудио — на нашем сервере в РФ, текст — в Z.AI, Сингапур). <a href="https://studio.fedrbodr.com/consent/diagnostic" target="_blank" rel="noopener">Условия согласия</a></span>
         </label>
         <div class="wizard-actions">
           <button type="button" class="btn btn-primary" id="assistant-start" data-i18n data-ru="Разобрать мой процесс" data-en="Analyze my process">Разобрать мой процесс</button>
+          <button type="button" class="btn btn-ghost" id="assistant-voice" data-i18n data-ru="🎙 Продиктовать" data-en="🎙 Dictate">🎙 Продиктовать</button>
+          <span class="wizard-voice-hint" id="assistant-voice-hint" data-i18n data-ru="Или продиктуйте — до 3 минут" data-en="Or dictate — up to 3 minutes">Или продиктуйте — до 3 минут</span>
           <span class="wizard-hint" id="assistant-hint" data-i18n data-ru="Минимум 20 символов" data-en="At least 20 characters">Минимум 20 символов</span>
         </div>
       </div>
@@ -1019,7 +1033,170 @@
     }).catch(function(){ setStatus(tr('unavailable')); renderFallback(); });
   }
 
+  var form = $('assistant-form'), questionsEl = $('assistant-questions'),
+      resultEl = $('assistant-result'), handoffEl = $('assistant-handoff'),
+      statusEl = $('assistant-status'), input = $('assistant-input'),
+      consent = $('assistant-consent'), startBtn = $('assistant-start'),
+      voiceBtn = $('assistant-voice'), voiceHint = $('assistant-voice-hint');
+
+  var VOICE_SEGMENT_SECONDS = 10;
+  var VOICE_MAX_SEGMENTS = 18;
+  var VOICE_MIMES = ['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/mpeg'];
+
+  var voice = { active: false, stream: null, recorder: null, timer: null,
+    segmentIndex: 0, results: {}, nextToAppend: 0, baseText: '', startedAt: 0 };
+
+  function pickVoiceMime(){
+    if (typeof MediaRecorder === 'undefined') return null;
+    for (var i = 0; i < VOICE_MIMES.length; i++) {
+      if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(VOICE_MIMES[i])) {
+        return VOICE_MIMES[i];
+      }
+    }
+    return null;
+  }
+
+  function voiceHintText(msg){ voiceHint.textContent = msg; }
+  function voiceSeconds(){
+    return Math.floor((Date.now() - voice.startedAt) / 1000);
+  }
+  function updateVoiceTimer(){
+    if (!voice.active) return;
+    var s = voiceSeconds();
+    voiceHintText(lang() === 'en'
+      ? 'Recording… 0:' + (s < 10 ? '0' : '') + s + ' (max 3:00)'
+      : 'Запись… 0:' + (s < 10 ? '0' : '') + s + ' (макс 3:00)');
+  }
+
+  function stopVoiceTracks(){
+    if (voice.stream) {
+      voice.stream.getTracks().forEach(function(t){ t.stop(); });
+      voice.stream = null;
+    }
+  }
+
+  function uploadVoiceSegment(blob, index, receipt){
+    var ext = (pickVoiceMime() || 'audio/webm').split('/')[1];
+    var fd = new FormData();
+    fd.set('audio', blob, 'segment-' + index + '.' + ext);
+    fd.set('segmentIndex', String(index));
+    return fetch(API + '/api/transcribe', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'X-Transcribe-Segment': 'true',
+        'X-Diagnostic-Consent': receipt
+      },
+      body: fd
+    }).then(function(res){ return res.json(); }).then(function(data){
+      if (data && data.ok && typeof data.transcript === 'string') {
+        voice.results[index] = data.transcript;
+      }
+      flushVoiceText();
+    }).catch(function(){
+      voiceHintText(lang() === 'en'
+        ? 'Part of the audio was not recognized — the rest is kept.'
+        : 'Часть аудио не распозналась — остальное добавлено.');
+    });
+  }
+
+  function flushVoiceText(){
+    var appended = '';
+    while (voice.results.hasOwnProperty(voice.nextToAppend)) {
+      var t = voice.results[voice.nextToAppend];
+      delete voice.results[voice.nextToAppend];
+      if (t) appended += (appended ? ' ' : '') + t;
+      voice.nextToAppend += 1;
+    }
+    if (appended) {
+      var current = input.value;
+      var glue = current && !/\s$/.test(current) ? ' ' : '';
+      input.value = current + glue + appended;
+      if (!voice.active) voiceHintText(lang() === 'en' ? 'Added to the description.' : 'Добавлено в описание.');
+    }
+  }
+
+  function startVoiceSegment(receipt, mimeType){
+    if (!voice.active) return finishVoice();
+    if (voice.segmentIndex >= VOICE_MAX_SEGMENTS) return finishVoice();
+    var index = voice.segmentIndex;
+    voice.segmentIndex += 1;
+    var chunks = [];
+    var recorder = new MediaRecorder(voice.stream, { mimeType: mimeType });
+    voice.recorder = recorder;
+    recorder.ondataavailable = function(e){
+      if (e.data && e.data.size > 0) chunks.push(e.data);
+    };
+    recorder.onstop = function(){
+      var blob = new Blob(chunks, { type: mimeType });
+      uploadVoiceSegment(blob, index, receipt);
+      if (voice.active) {
+        voice.timer = setTimeout(function(){ startVoiceSegment(receipt, mimeType); }, 50);
+      } else {
+        finishVoice();
+      }
+    };
+    recorder.start();
+    voice.timer = setTimeout(function(){
+      if (recorder.state === 'recording') recorder.stop();
+    }, VOICE_SEGMENT_SECONDS * 1000);
+  }
+
+  function finishVoice(){
+    voice.active = false;
+    if (voice.timer) { clearTimeout(voice.timer); voice.timer = null; }
+    stopVoiceTracks();
+    voiceBtn.classList.remove('recording');
+    voiceBtn.setAttribute('data-i18n', '');
+    voiceBtn.setAttribute('data-ru', '🎙 Продиктовать');
+    voiceBtn.setAttribute('data-en', '🎙 Dictate');
+    voiceBtn.textContent = lang() === 'en' ? '🎙 Dictate' : '🎙 Продиктовать';
+    setTimeout(function(){ flushVoiceText(); }, 1500);
+  }
+
+  function startVoice(){
+    if (voice.active) { // stop requested
+      voice.active = false;
+      if (voice.recorder && voice.recorder.state === 'recording') voice.recorder.stop();
+      return;
+    }
+    var mimeType = pickVoiceMime();
+    if (!mimeType || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      voiceHintText(lang() === 'en'
+        ? 'Voice input is not supported by this browser — please type.'
+        : 'Голосовой ввод не поддерживается этим браузером — напишите текстом.');
+      return;
+    }
+    voiceHintText(lang() === 'en' ? 'Requesting microphone…' : 'Запрашиваю микрофон…');
+    getConsentReceipt().then(function(receipt){
+      return navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream){
+        voice.active = true;
+        voice.stream = stream;
+        voice.segmentIndex = 0;
+        voice.results = {};
+        voice.nextToAppend = 0;
+        voice.baseText = input.value;
+        voice.startedAt = Date.now();
+        voiceBtn.classList.add('recording');
+        voiceBtn.textContent = lang() === 'en' ? '⏹ Stop' : '⏹ Остановить';
+        updateVoiceTimer();
+        voice.timer = setInterval(updateVoiceTimer, 1000);
+        startVoiceSegment(receipt, mimeType);
+      });
+    }).catch(function(){
+      voiceHintText(lang() === 'en'
+        ? 'Microphone access denied — please type.'
+        : 'Доступ к микрофону не выдан — напишите текстом.');
+    });
+  }
+
+  voiceBtn.addEventListener('click', startVoice);
+
   startBtn.addEventListener('click', function(){
+    if (voice.active) {
+      voice.active = false;
+      if (voice.recorder && voice.recorder.state === 'recording') voice.recorder.stop();
+    }
     var text = input.value.trim();
     if (text.length < 20 || !consent.checked) {
       setStatus(tr('needForm'));

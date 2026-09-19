@@ -50,3 +50,16 @@ test('floating card exists, links to section and remembers dismissal', () => {
   assert.match(floatScript, /IntersectionObserver/);
   assert.match(floatScript, /sessionStorage/);
 });
+
+test('voice input records segments and uploads them to studio transcribe', () => {
+  assert.match(script, /getUserMedia/);
+  assert.match(script, /MediaRecorder/);
+  assert.match(script, /\/api\/transcribe/);
+  assert.match(script, /X-Transcribe-Segment/);
+  assert.match(script, /segmentIndex/);
+});
+
+test('consent copy mentions audio processing', () => {
+  assert.match(html, /и аудио/);
+  assert.match(html, /server in Russia|нашем сервере в РФ/);
+});

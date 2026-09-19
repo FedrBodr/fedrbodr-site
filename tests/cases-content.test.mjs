@@ -27,3 +27,11 @@ test('experience states 20+ years and paid pilot', () => {
   assert.match(exp, /клиентский пилот принят и оплачен/);
   assert.doesNotMatch(exp, /15\+ лет/);
 });
+
+test('Prostranstvo is featured as an own product case', () => {
+  const cases = html.slice(html.indexOf('<section id="cases"'), html.indexOf('</section>', html.indexOf('<section id="cases"')));
+  assert.match(cases, /data-case="prostranstvo"/);
+  assert.match(cases, /fedrbodr\.com\/prostranstvo\//);
+  assert.match(cases, /fedrbodr\.com\/batareya\//);
+  assert.match(cases, /Собственный продукт/);
+});

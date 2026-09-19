@@ -27,3 +27,17 @@ test('days-only promise is scoped to prototypes', () => {
   const order = html.slice(html.indexOf('<section id="order"'), html.indexOf('</section>', html.indexOf('<section id="order"')));
   assert.match(order, /Рабочий прототип за несколько дней/);
 });
+
+test('automation direction includes MAX among channels', () => {
+  const order = html.slice(html.indexOf('<section id="order"'), html.indexOf('</section>', html.indexOf('<section id="order"')));
+  assert.match(order, /CRM, Telegram, MAX, таблицы, email/);
+  assert.match(order, /CRM, Telegram, MAX, spreadsheets, email/);
+});
+
+test('own products take weeks, not days, from idea to production', () => {
+  const about = html.slice(html.indexOf('<section id="about"'), html.indexOf('</section>', html.indexOf('<section id="about"')));
+  assert.match(about, /за несколько недель/);
+  assert.match(about, /in a few weeks/);
+  assert.doesNotMatch(about, /за несколько дней/);
+  assert.doesNotMatch(about, /in a few days/);
+});
