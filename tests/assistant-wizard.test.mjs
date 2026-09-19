@@ -41,3 +41,12 @@ test('handoff waits plausible elapsed time and includes honeypot', () => {
   assert.match(script, /handoffStartedAt/);
   assert.match(script, /website/);
 });
+
+test('floating card exists, links to section and remembers dismissal', () => {
+  assert.match(html, /id="assistant-float"/);
+  assert.match(html, /href="#assistant"/);
+  assert.match(html, /assistantFloatDismissed|fedrbodr\.assistantFloatClosed/);
+  const floatScript = html.match(/<script id="assistant-float">([\s\S]*?)<\/script>/)?.[1] || '';
+  assert.match(floatScript, /IntersectionObserver/);
+  assert.match(floatScript, /sessionStorage/);
+});

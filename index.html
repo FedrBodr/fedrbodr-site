@@ -1031,5 +1031,45 @@
   });
 })();
 </script>
+<div id="assistant-float" class="assistant-float hidden">
+  <button type="button" class="assistant-float-close" id="assistant-float-close" aria-label="×">×</button>
+  <p data-i18n data-ru="🤖 Мой AI-ассистент разберёт вашу рутину за 3 шага" data-en="🤖 My AI assistant breaks down your routine in 3 steps">🤖 Мой AI-ассистент разберёт вашу рутину за 3 шага</p>
+  <a href="#assistant" class="btn btn-primary" data-i18n data-ru="Попробовать" data-en="Try it">Попробовать</a>
+</div>
+<script id="assistant-float">
+(function(){
+  var floatCard = document.getElementById('assistant-float');
+  if (!floatCard) return;
+  var KEY = 'fedrbodr.assistantFloatClosed';
+  var dismissed = false;
+  try { dismissed = sessionStorage.getItem(KEY) === '1'; } catch (_) {}
+  function track(goal){
+    try {
+      if (location.hostname !== 'fedrbodr.com') return;
+      if (typeof ym === 'function') ym(110561904, 'reachGoal', goal, {});
+      if (typeof gtag === 'function') gtag('event', goal, {});
+    } catch (_) {}
+  }
+  document.getElementById('assistant-float-close').addEventListener('click', function(){
+    dismissed = true;
+    floatCard.classList.add('hidden');
+    try { sessionStorage.setItem(KEY, '1'); } catch (_) {}
+  });
+  floatCard.querySelector('a').addEventListener('click', function(){ track('assistant_float_click'); });
+  var anchor = document.getElementById('experience');
+  if (!dismissed && anchor && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          floatCard.classList.remove('hidden');
+          track('assistant_view');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(anchor);
+  }
+})();
+</script>
 </body>
 </html>
