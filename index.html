@@ -259,6 +259,30 @@
   .order .step h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
   .order .step p{color:var(--muted);font-size:14px}
   .order .fineprint{color:var(--muted);font-size:13px;margin-top:14px}
+  /* AI assistant wizard */
+  .wizard{margin-top:18px;display:grid;gap:14px;max-width:640px}
+  .wizard-step.hidden,#assistant-status.hidden,.assistant-float.hidden{display:none}
+  .wizard .wizard-label{display:block;font-size:14px;margin-bottom:8px}
+  #assistant-input{width:100%;background:var(--soft-2);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;font:inherit;resize:vertical}
+  #assistant-input:focus{outline:2px solid var(--blue);outline-offset:1px}
+  .wizard-consent{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted)}
+  .wizard-consent a{color:var(--sky)}
+  .wizard-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .wizard-hint{font-size:12px;color:var(--muted)}
+  .wizard-q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+  .wizard-q>p{margin-bottom:10px}
+  .wizard-choice{display:flex;gap:8px;align-items:center;font-size:14px;margin:4px 0}
+  .wizard-q textarea{width:100%;background:var(--soft-2);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;font:inherit;margin-bottom:10px;resize:vertical}
+  .wizard-result-block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+  .wizard-result-block h4{margin-bottom:6px}
+  .wizard-result-block ul{margin:0;padding-left:18px;color:var(--muted)}
+  .wizard-status{color:var(--muted);font-size:13px}
+  #assistant-handoff input[type="text"],#assistant-handoff select{width:100%;max-width:360px;background:var(--soft-2);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:10px 12px;font:inherit;margin:4px 0}
+  /* Floating assistant card */
+  .assistant-float{position:fixed;right:16px;bottom:16px;z-index:60;max-width:280px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:0 8px 30px rgba(0,0,0,.35);display:grid;gap:10px}
+  .assistant-float p{font-size:13px;line-height:1.4}
+  .assistant-float-close{position:absolute;top:6px;right:8px;background:none;border:0;color:var(--muted);font-size:16px;cursor:pointer}
+  @media(max-width:560px){.assistant-float{left:16px;right:16px;max-width:none}}
   /* Experience / track record */
   .creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:26px 0}
   .cred{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
