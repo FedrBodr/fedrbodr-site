@@ -758,5 +758,278 @@
   }
 })();
 </script>
+<script id="assistant-wizard">
+(function(){
+  var API = 'https://studio.fedrbodr.com';
+  var DIAGNOSTIC_CONSENT_VERSION = "2026-09-18-v1";
+  var LEAD_CONSENT_VERSION = "2026-09-10-v1";
+  var CONSENT_KEY = 'fedrbodr.assistant.consent';
+
+  var T = {
+    ru: {
+      answer: 'Ответить',
+      leadTitle: 'Хотите разбор лично от Дмитрия? Оставьте контакт — он посмотрит ваш процесс.',
+      leadConsent: 'Согласен на передачу контакта для ответа. Условия:',
+      send: 'Запросить личный разбор',
+      sent: 'Принято — Дмитрий ответит лично.',
+      phone: 'Телефон',
+      needForm: 'Опишите задачу (минимум 20 символов) и дайте согласие.',
+      limit: 'Слишком много запросов. Попробуйте через несколько минут.',
+      unavailable: 'Ассистент сейчас недоступен. Попробуйте позже или напишите в Telegram.',
+      broken: 'Что-то сломалось. Попробуйте ещё раз или напишите в Telegram.',
+      fallbackText: 'Ассистент сейчас недоступен. Напишите задачу напрямую — отвечу лично.',
+      automate: 'Автоматизировать первым',
+      keep: 'Оставить человеку'
+    },
+    en: {
+      answer: 'Answer',
+      leadTitle: "Want Dmitry to review it personally? Leave a contact and he'll look at your process.",
+      leadConsent: 'I agree to share my contact for a reply. Terms:',
+      send: 'Request personal review',
+      sent: "Got it — Dmitry will reply personally.",
+      phone: 'Phone',
+      needForm: 'Describe the task (20+ characters) and accept the consent.',
+      limit: 'Too many requests. Please try again in a few minutes.',
+      unavailable: "The assistant is unavailable right now. Try later or message me on Telegram.",
+      broken: 'Something broke. Try again or message me on Telegram.',
+      fallbackText: "The assistant is unavailable right now. Message me directly — I'll reply personally.",
+      automate: 'Automate first',
+      keep: 'Keep human'
+    }
+  };
+
+  function lang(){ return document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ru'; }
+  function tr(key){ return T[lang()][key]; }
+  function $(id){ return document.getElementById(id); }
+
+  var form = $('assistant-form'), questionsEl = $('assistant-questions'),
+      resultEl = $('assistant-result'), handoffEl = $('assistant-handoff'),
+      statusEl = $('assistant-status'), input = $('assistant-input'),
+      consent = $('assistant-consent'), startBtn = $('assistant-start');
+
+  var answers = [];
+  var processText = '';
+  var handoffStartedAt = null;
+  var lastResult = null;
+
+  function show(el){ el.classList.remove('hidden'); }
+  function hide(el){ el.classList.add('hidden'); }
+  function setStatus(msg){ statusEl.textContent = msg; if (msg) show(statusEl); else hide(statusEl); }
+
+  function post(path, body, extraHeaders){
+    return fetch(API + path, {
+      method: 'POST',
+      credentials: "include",
+      headers: Object.assign({ 'Content-Type': 'application/json' }, extraHeaders || {}),
+      body: JSON.stringify(body)
+    });
+  }
+
+  function errorText(code){
+    if (code === 'RATE_LIMITED') return tr('limit');
+    return tr('unavailable');
+  }
+
+  function el(tag, className, text){
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function telegramLink(){
+    var a = el('a', 'btn btn-primary', 'Telegram');
+    a.href = 'https://t.me/FedrBodr';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    return a;
+  }
+
+  function renderFallback(){
+    setStatus('');
+    handoffEl.textContent = '';
+    handoffEl.appendChild(el('p', null, tr('fallbackText')));
+    handoffEl.appendChild(telegramLink());
+    show(handoffEl);
+  }
+
+  function getConsentReceipt(){
+    var cached = null;
+    try { cached = JSON.parse(sessionStorage.getItem(CONSENT_KEY) || 'null'); } catch (_) {}
+    if (cached && cached.receipt && Date.parse(cached.receiptExpiresAt) > Date.now()) {
+      return Promise.resolve(cached.receipt);
+    }
+    return post('/api/consents/diagnostic', {
+      consent: true, scope: 'diagnostic', consentVersion: DIAGNOSTIC_CONSENT_VERSION
+    }).then(function(res){
+      if (!res.ok) throw new Error('CONSENT_FAILED');
+      return res.json();
+    }).then(function(data){
+      try { sessionStorage.setItem(CONSENT_KEY, JSON.stringify(data)); } catch (_) {}
+      return data.receipt;
+    });
+  }
+
+  function diagnose(){
+    return getConsentReceipt().then(function(receipt){
+      return post('/api/diagnose', { processText: processText, answers: answers, mode: "personal" }, {
+        'X-Diagnostic-Consent': receipt
+      });
+    });
+  }
+
+  function renderQuestion(q){
+    questionsEl.textContent = '';
+    var box = el('div', 'wizard-q');
+    box.appendChild(el('p', null, q.prompt));
+    var chosen = null;
+    if (q.kind === 'single_choice') {
+      q.options.forEach(function(opt){
+        var label = el('label', 'wizard-choice');
+        var radio = document.createElement('input');
+        radio.type = 'radio'; radio.name = 'q_' + q.id; radio.value = opt;
+        radio.addEventListener('change', function(){ chosen = opt; });
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(opt));
+        box.appendChild(label);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.rows = 2; ta.maxLength = 1000; ta.dataset.qid = q.id;
+      box.appendChild(ta);
+    }
+    var btn = el('button', 'btn btn-primary', tr('answer'));
+    btn.type = 'button';
+    btn.addEventListener('click', function(){
+      var value = q.kind === 'single_choice' ? chosen : (box.querySelector('textarea') || {}).value;
+      if (!value || !String(value).trim()) return;
+      answers.push({ questionId: q.id, value: String(value).trim().slice(0, 1000) });
+      next();
+    });
+    box.appendChild(btn);
+    questionsEl.appendChild(box);
+    show(questionsEl);
+  }
+
+  function resultBlock(title, items){
+    var b = el('div', 'wizard-result-block');
+    b.appendChild(el('h4', null, title));
+    if (items) {
+      var ul = document.createElement('ul');
+      items.forEach(function(t){ ul.appendChild(el('li', null, t)); });
+      b.appendChild(ul);
+    }
+    return b;
+  }
+
+  function renderResult(result){
+    hide(questionsEl);
+    resultEl.textContent = '';
+    resultEl.appendChild(resultBlock(result.summary));
+    if (result.fit === 'not_worth_automating' || result.fit === 'high_risk') {
+      if (result.risks && result.risks.length) resultEl.appendChild(resultBlock(tr('keep'), result.risks));
+    } else {
+      resultEl.appendChild(resultBlock(tr('automate'), result.automateFirst));
+      resultEl.appendChild(resultBlock(tr('keep'), result.keepHuman));
+      resultEl.appendChild(resultBlock(result.firstExperiment));
+    }
+    show(resultEl);
+    renderHandoff(result);
+  }
+
+  function track(goal){
+    try {
+      if (location.hostname !== 'fedrbodr.com') return;
+      if (typeof ym === 'function') ym(110561904, 'reachGoal', goal, {});
+      if (typeof gtag === 'function') gtag('event', goal, {});
+    } catch (_) {}
+  }
+
+  function renderHandoff(result){
+    handoffEl.textContent = '';
+    lastResult = result;
+    handoffStartedAt = new Date().toISOString();
+    handoffEl.appendChild(el('p', null, tr('leadTitle')));
+    var hp = document.createElement('input');
+    hp.type = 'text'; hp.name = 'website'; hp.id = 'assistant-website';
+    hp.style.display = 'none'; hp.tabIndex = -1; hp.autocomplete = 'off';
+    handoffEl.appendChild(hp);
+    var select = document.createElement('select');
+    select.id = 'assistant-channel';
+    [['telegram', 'Telegram'], ['phone', tr('phone')], ['email', 'Email']].forEach(function(pair){
+      var o = document.createElement('option');
+      o.value = pair[0]; o.textContent = pair[1];
+      select.appendChild(o);
+    });
+    handoffEl.appendChild(select);
+    var contact = document.createElement('input');
+    contact.type = 'text'; contact.id = 'assistant-contact'; contact.maxLength = 254;
+    contact.placeholder = '@username / +7… / you@mail.com';
+    handoffEl.appendChild(contact);
+    var agree = el('label', 'wizard-consent');
+    var box = document.createElement('input');
+    box.type = 'checkbox'; box.id = 'assistant-lead-consent';
+    agree.appendChild(box);
+    var agreeText = el('span', null, tr('leadConsent') + ' ');
+    var terms = document.createElement('a');
+    terms.href = 'https://studio.fedrbodr.com/consent/lead';
+    terms.target = '_blank'; terms.rel = 'noopener'; terms.textContent = '→';
+    agreeText.appendChild(terms);
+    agree.appendChild(agreeText);
+    handoffEl.appendChild(agree);
+    var send = el('button', 'btn btn-primary', tr('send'));
+    send.type = 'button'; send.id = 'assistant-send';
+    send.addEventListener('click', function(){
+      var channel = select.value, contactValue = contact.value.trim();
+      if (!box.checked || contactValue.length < 3) return;
+      var composed = ('Заявка с fedrbodr.com. Процесс: ' + processText.slice(0, 300) + ' Разбор: ' + (result.summary || '')).slice(0, 1200);
+      post('/api/leads', {
+        channel: channel, contactValue: contactValue, summary: composed,
+        consent: true, consentVersion: LEAD_CONSENT_VERSION,
+        handoffStartedAt: handoffStartedAt, website: hp.value, source: "fedrbodr.com"
+      }).then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
+        .then(function(r){
+          if (r.ok && r.data.ok) {
+            handoffEl.textContent = '';
+            handoffEl.appendChild(el('p', null, tr('sent')));
+            track('assistant_lead');
+          } else {
+            setStatus(errorText(r.data && r.data.code));
+          }
+        })
+        .catch(function(){ setStatus(tr('broken')); });
+    });
+    handoffEl.appendChild(send);
+    show(handoffEl);
+  }
+
+  function next(){
+    setStatus('');
+    diagnose().then(function(res){
+      return res.json().then(function(data){ return { ok: res.ok, data: data }; });
+    }).then(function(r){
+      if (!r.ok) {
+        setStatus(errorText(r.data && r.data.code));
+        if (!r.data || r.data.code === 'DIAGNOSTIC_UNAVAILABLE' || r.data.code === 'CONSENT_REQUIRED') renderFallback();
+        return;
+      }
+      var turn = r.data.turn;
+      if (turn.kind === 'question') renderQuestion(turn.question);
+      else renderResult(turn.result);
+    }).catch(function(){ setStatus(tr('unavailable')); renderFallback(); });
+  }
+
+  startBtn.addEventListener('click', function(){
+    var text = input.value.trim();
+    if (text.length < 20 || !consent.checked) {
+      setStatus(tr('needForm'));
+      return;
+    }
+    processText = text.slice(0, 4000);
+    hide(form);
+    next();
+  });
+})();
+</script>
 </body>
 </html>
