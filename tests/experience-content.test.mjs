@@ -26,7 +26,7 @@ test('experience credentials contain concrete bilingual proof points', () => {
 });
 
 test('experience section names current shipped outcomes without unsupported metrics', () => {
-  for (const result of ['Vezdepost', 'KSY Deals работает в проде', 'пилот принят и оплачен', 'Marcel Lior']) {
+  for (const result of ['Vezdepost', 'KSY Deals работает в проде', 'интеграцию MAX']) {
     assert.match(experience, new RegExp(result));
   }
   assert.doesNotMatch(experience, /million tokens|миллион(?:а|ов)? токенов|552 tests|552 теста|AhMiranami приносит доход|KSY Store/);

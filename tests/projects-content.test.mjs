@@ -15,7 +15,7 @@ function section(name) {
 }
 
 test('current projects exist in the agreed order', () => {
-  const expected = ['gopro-wifi-viewer', 'imvu-profit', 'marcel-lior'];
+  const expected = ['gopro-wifi-viewer', 'imvu-profit'];
   const actual = [...html.matchAll(/data-project="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(actual, expected);
 });
@@ -46,13 +46,12 @@ test('removed projects are gone from the working group', () => {
   assert.doesNotMatch(working, />Lead Intelligence</);
 });
 
-test('launched group keeps Vezdepost and Marcel Lior with their links', () => {
+test('launched group keeps Vezdepost with their links', () => {
   const launched = section('launched');
   assert.match(launched, />Vezdepost</);
   assert.match(launched, /https:\/\/vezdepost\.ru/);
   assert.match(launched, /https:\/\/github\.com\/FedrBodr\/vezdepost/);
-  assert.match(launched, />Marcel Lior</);
-  assert.match(launched, /https:\/\/marcellior\.com\//);
+  assert.doesNotMatch(launched, />Marcel Lior</);
   assert.doesNotMatch(launched, />Русский Лайнап</);
   assert.doesNotMatch(launched, /russianlineup\.ru/);
 });
