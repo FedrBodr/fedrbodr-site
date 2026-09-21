@@ -138,13 +138,16 @@
   .brand{font-family:"Unbounded",sans-serif;font-weight:700;letter-spacing:-.01em;font-size:16px;display:flex;align-items:center;gap:10px}
   .brand-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--red);flex:none}
   .nav-links{display:flex;align-items:center;gap:22px}
-  .nav-links a{font-size:14px;color:var(--muted);font-weight:500}
+  .nav-links a{font-size:14px;color:var(--muted);font-weight:500;white-space:nowrap}
+  .brand{white-space:nowrap}
   .nav-links a:hover{color:var(--ink)}
   .lang{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--card);font-family:"JetBrains Mono",monospace}
   .lang button{border:0;background:transparent;padding:6px 12px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
   .lang button.active{background:var(--blue);color:var(--on-accent)}
   .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);font-size:16px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
   .theme-toggle:hover{border-color:var(--blue);box-shadow:0 0 12px var(--accent-shadow)}
+  @media(max-width:1180px){.nav-links{gap:14px}.nav-links a{font-size:13px}}
+  @media(max-width:1020px){.nav-links a[href="#show"],.nav-links a[href="#build"],.nav-links a[href="#experience"]{display:none}}
   @media(max-width:820px){
     .nav-links{gap:10px}
     .nav-links a:not(.lang-wrap){display:none}
@@ -368,8 +371,8 @@
     <h2 data-i18n data-ru="Два направления услуг" data-en="Two service lines">Два направления услуг</h2>
     <div class="dir-grid">
       <a class="dir-card" href="#assistant">
-        <span class="dir-badge" data-i18n data-ru="Автоматизация" data-en="Automation">Автоматизация</span>
-        <h3 data-i18n data-ru="AI-разбор процесса" data-en="AI process analysis">AI-разбор процесса</h3>
+        <span class="dir-badge" data-i18n data-ru="IT" data-en="IT">IT</span>
+        <h3 data-i18n data-ru="IT разработка и автоматизация процессов" data-en="IT development and process automation">IT разработка и автоматизация процессов</h3>
         <p data-i18n data-ru="Опишите рутину текстом или голосом — живой ассистент задаст уточняющие вопросы и покажет, что автоматизировать, а что оставить человеку. Разбор сразу, заявка мне лично." data-en="Describe the routine by text or voice — a live assistant asks a couple of questions and shows what to automate and what to keep human. Instant analysis, the request reaches me personally.">Опишите рутину текстом или голосом — живой ассистент задаст уточняющие вопросы и покажет, что автоматизировать, а что оставить человеку. Разбор сразу, заявка мне лично.</p>
         <span class="dir-cta" data-i18n data-ru="Попробовать разбор →" data-en="Try the analysis →">Попробовать разбор →</span>
       </a>
@@ -407,6 +410,7 @@
       </div>
     </div>
     <a href="https://t.me/FedrBodr" target="_blank" rel="noopener" class="btn btn-primary" data-i18n data-ru="Обсудить задачу в Telegram" data-en="Discuss your task on Telegram">Обсудить задачу в Telegram</a>
+    <a href="https://max.ru/u/f9LHodD0cOJIYmb5pK34MfkOIzKu8agP6miCHHiifKLyv2APp6nalWh4xoQ" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n data-ru="Обсудить задачу в MAX" data-en="Discuss your task on MAX">Обсудить задачу в MAX</a>
     <p class="fineprint" data-i18n data-ru="Диагностика задачи бесплатна. Старт после небольшой предоплаты, работа по договору, чек самозанятого." data-en="Task diagnosis is free. Start after a small deposit, under a contract, with a self-employed receipt.">Диагностика задачи бесплатна. Старт после небольшой предоплаты, работа по договору, чек самозанятого.</p>
   </div>
 </section>
@@ -425,18 +429,14 @@
           <a href="https://ksy-store.ru/" target="_blank" rel="noopener">ksy-store.ru →</a>
         </div>
       </article>
-      <article class="proj-card case-card" data-case="marcel">
-        <span class="project-badge" data-i18n data-ru="Разработка" data-en="Development">Разработка</span>
-        <h3>Marcel Lior</h3>
-        <p data-i18n data-ru="Задача: полностью обновить сайт и вывести его с конструктора. Решение: новый дизайн, вёрстка, перенос и релиз под ключ. Результат: сайт сдан и работает; сейчас идёт SEO/GEO-эксперимент по видимости в классическом и AI-поиске." data-en="Task: fully rebuild the site and move it off a site builder. Solution: new design, markup, migration and an end-to-end release. Result: delivered and live; an SEO/GEO visibility experiment is running now.">Задача: полностью обновить сайт и вывести его с конструктора. Решение: новый дизайн, вёрстка, перенос и релиз под ключ. Результат: сайт сдан и работает; сейчас идёт SEO/GEO-эксперимент по видимости в классическом и AI-поиске.</p>
+      <article class="proj-card case-card" data-case="vezdepost">
+        <span class="project-badge" data-i18n data-ru="Интеграция · MAX" data-en="Integration · MAX">Интеграция · MAX</span>
+        <h3>Vezdepost</h3>
+        <p data-i18n data-ru="Задача: в существующей маркетинговой платформе для отложенного постинга (Postiz) не было мессенджера MAX. Решение: разобрался в чужой кодовой базе и доработал интеграцию MAX — подключение канала, публикация по расписанию наравне с Telegram, VK и X. Результат: интеграция работает в проде на vezdepost.ru, код открыт на GitHub." data-en="Task: an existing marketing platform for scheduled posting (Postiz) had no MAX messenger support. Solution: I dug into someone else's codebase and built the MAX integration — channel connection and scheduled publishing on par with Telegram, VK and X. Result: the integration runs in production at vezdepost.ru, the code is open on GitHub.">Задача: в существующей маркетинговой платформе для отложенного постинга (Postiz) не было мессенджера MAX. Решение: разобрался в чужой кодовой базе и доработал интеграцию MAX — подключение канала, публикация по расписанию наравне с Telegram, VK и X. Результат: интеграция работает в проде на vezdepost.ru, код открыт на GitHub.</p>
         <div class="links">
-          <a href="https://marcellior.com/" target="_blank" rel="noopener">marcellior.com →</a>
+          <a href="https://vezdepost.ru" target="_blank" rel="noopener">vezdepost.ru →</a>
+          <a href="https://github.com/FedrBodr/vezdepost" target="_blank" rel="noopener">GitHub →</a>
         </div>
-      </article>
-      <article class="proj-card case-card" data-case="fintech">
-        <span class="project-badge" data-i18n data-ru="Fintech · NDA" data-en="Fintech · NDA">Fintech · NDA</span>
-        <h3 data-i18n data-ru="Клиентский пилот без названия" data-en="Unnamed client pilot">Клиентский пилот без названия</h3>
-        <p data-i18n data-ru="Задача: заказчику нужен был работающий первый этап продукта. Решение: диагностика, узкий скоуп, реализация и передача. Результат: этап принят заказчиком и полностью оплачен." data-en="Task: the client needed a working first stage of their product. Solution: diagnosis, a narrow scope, implementation and handover. Result: the stage was accepted and fully paid.">Задача: заказчику нужен был работающий первый этап продукта. Решение: диагностика, узкий скоуп, реализация и передача. Результат: этап принят заказчиком и полностью оплачен.</p>
       </article>
       <article class="proj-card case-card" data-case="prostranstvo">
         <span class="project-badge" data-i18n data-ru="Собственный продукт · 3D" data-en="Own product · 3D">Собственный продукт · 3D</span>
@@ -456,7 +456,7 @@
   <div class="wrap">
     <p class="eyebrow" data-i18n data-ru="Опыт" data-en="Track record">Опыт</p>
     <h2 data-i18n data-ru="20+ лет: от банковских транзакций до собственных AI-продуктов" data-en="20+ years: from banking transactions to my own AI products">20+ лет: от банковских транзакций до собственных AI-продуктов</h2>
-    <p class="lead" data-i18n data-ru="Работал с системами, где результат измеряется не строками кода, а надёжностью платежей и работающим продом. Делал интернет-банки, криптокошельки и платёжные сервисы для Сбербанка, Райффайзена, Альфа-Банка и Crypterium. В Сбере участвовал в обработке ежедневного потока транзакций по всей стране, в Crypterium разрабатывал платёжные микросервисы и интеграции с ЮKassa, QIWI и другими системами. Собрал и вёл команду до 13 человек. Сегодня использую этот опыт, чтобы с помощью ИИ быстрее выпускать собственные и клиентские продукты. KSY Deals работает в проде, клиентский пилот принят и оплачен, сайт Marcel Lior сдан под ключ, Vezdepost поддерживает публикацию в 30+ платформ. Не просто пишу код — довожу продукт от идеи до работающего результата." data-en="I have worked on systems where results are measured not in lines of code, but in reliable payments and software that reaches production. I built online banking, crypto-wallet, and payment services for Sberbank, Raiffeisen, Alfa-Bank, and Crypterium. At Sberbank, I helped process the daily nationwide transaction flow; at Crypterium, I built payment microservices and integrations with YooKassa, QIWI, and other providers. I also built and led a team of up to 13 people. Today I use that experience and AI to ship my own products and client work faster. KSY Deals runs in production, the client pilot was accepted and fully paid, the Marcel Lior website was delivered end to end, and Vezdepost supports publishing to 30+ platforms. I do not just write code — I take products from idea to a working result.">Работал с системами, где результат измеряется не строками кода, а надёжностью платежей и работающим продом. Делал интернет-банки, криптокошельки и платёжные сервисы для Сбербанка, Райффайзена, Альфа-Банка и Crypterium. В Сбере участвовал в обработке ежедневного потока транзакций по всей стране, в Crypterium разрабатывал платёжные микросервисы и интеграции с ЮKassa, QIWI и другими системами. Собрал и вёл команду до 13 человек. Сегодня использую этот опыт, чтобы с помощью ИИ быстрее выпускать собственные и клиентские продукты. KSY Deals работает в проде, клиентский пилот принят и оплачен, сайт Marcel Lior сдан под ключ, Vezdepost поддерживает публикацию в 30+ платформ. Не просто пишу код — довожу продукт от идеи до работающего результата.</p>
+    <p class="lead" data-i18n data-ru="Работал с системами, где результат измеряется не строками кода, а надёжностью платежей и работающим продом. Делал интернет-банки, криптокошельки и платёжные сервисы для Сбербанка, Райффайзена, Альфа-Банка и Crypterium. В Сбере участвовал в обработке ежедневного потока транзакций по всей стране, в Crypterium разрабатывал платёжные микросервисы и интеграции с ЮKassa, QIWI и другими системами. Собрал и вёл команду до 13 человек. Сегодня использую этот опыт, чтобы с помощью ИИ быстрее выпускать собственные и клиентские продукты. KSY Deals работает в проде, в Vezdepost доработал интеграцию MAX — публикация в 30+ платформ. Не просто пишу код — довожу продукт от идеи до работающего результата." data-en="I have worked on systems where results are measured not in lines of code, but in reliable payments and software that reaches production. I built online banking, crypto-wallet, and payment services for Sberbank, Raiffeisen, Alfa-Bank, and Crypterium. At Sberbank, I helped process the daily nationwide transaction flow; at Crypterium, I built payment microservices and integrations with YooKassa, QIWI, and other providers. I also built and led a team of up to 13 people. Today I use that experience and AI to ship my own products and client work faster. KSY Deals runs in production, and in Vezdepost I built the MAX integration — publishing to 30+ platforms. I do not just write code — I take products from idea to a working result.">Работал с системами, где результат измеряется не строками кода, а надёжностью платежей и работающим продом. Делал интернет-банки, криптокошельки и платёжные сервисы для Сбербанка, Райффайзена, Альфа-Банка и Crypterium. В Сбере участвовал в обработке ежедневного потока транзакций по всей стране, в Crypterium разрабатывал платёжные микросервисы и интеграции с ЮKassa, QIWI и другими системами. Собрал и вёл команду до 13 человек. Сегодня использую этот опыт, чтобы с помощью ИИ быстрее выпускать собственные и клиентские продукты. KSY Deals работает в проде, в Vezdepost доработал интеграцию MAX — публикация в 30+ платформ. Не просто пишу код — довожу продукт от идеи до работающего результата.</p>
     <div class="creds">
       <div class="cred"><div class="big">20+</div><p data-i18n data-ru="лет коммерческой разработки" data-en="years of commercial development">лет коммерческой разработки</p></div>
       <div class="cred"><div class="big">13</div><p data-i18n data-ru="человек в команде, которую собрал и вёл" data-en="people in a team I built and led">человек в команде, которую собрал и вёл</p></div>
@@ -508,7 +508,7 @@
     <div class="project-group" data-project-group="launched">
       <div class="project-group-head">
         <h3 data-i18n data-ru="Запущено" data-en="Launched">Запущено</h3>
-        <span data-i18n data-ru="2 продукта · в проде" data-en="2 products · live">2 продукта · в проде</span>
+        <span data-i18n data-ru="1 продукт · в проде" data-en="1 product · live">1 продукт · в проде</span>
       </div>
       <div class="proj proj-launched">
         <article class="proj-card">
@@ -517,13 +517,6 @@
           <div class="links">
             <a href="https://vezdepost.ru" target="_blank" rel="noopener">vezdepost.ru →</a>
             <a href="https://github.com/FedrBodr/vezdepost" target="_blank" rel="noopener">GitHub →</a>
-          </div>
-        </article>
-        <article class="proj-card" data-project="marcel-lior">
-          <h3>Marcel Lior</h3>
-          <p data-i18n data-ru="Полное переписывание сайта под ключ: новый дизайн и вёрстка сданы и в проде. Сейчас в процессе SEO/GEO-эксперимент по продвижению в классическом и AI-поиске." data-en="A full site rewrite delivered end to end: new design and markup shipped to production. Currently running an SEO/GEO experiment to grow visibility in classic and AI search.">Полное переписывание сайта под ключ: новый дизайн и вёрстка сданы и в проде. Сейчас в процессе SEO/GEO-эксперимент по продвижению в классическом и AI-поиске.</p>
-          <div class="links">
-            <a href="https://marcellior.com/" target="_blank" rel="noopener">marcellior.com →</a>
           </div>
         </article>
       </div>
@@ -603,7 +596,7 @@
       <a href="https://instagram.com/fedrbodr" target="_blank" rel="noopener">Instagram</a>
       <a href="https://vezdepost.ru" target="_blank" rel="noopener">Vezdepost</a>
     </div>
-    <div data-i18n data-ru="© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух." data-en="© 2026 Dmitry Fedorenko (FedrBodr). Built in public.">© 2026 Дмитрий Федоренко (FedrBodr). Собрано вслух.</div>
+    <div data-i18n data-ru="© 2026 Дмитрий Федоренко (FedrBodr)." data-en="© 2026 Dmitry Fedorenko (FedrBodr).">© 2026 Дмитрий Федоренко (FedrBodr).</div>
   </div>
 </footer>
 
