@@ -20,7 +20,7 @@ source "$CFG"
 : "${FTP_DIR:?нужен FTP_DIR в deploy.config}"
 
 # Список файлов сайта, которые заливаем
-FILES=("index.html" "robots.txt" "sitemap.xml" "og-image.jpg" "apple-touch-icon.png" "img/avatar.jpg" "img/portrait.jpg")
+FILES=("index.html" "robots.txt" "sitemap.xml" "og-image.jpg" "apple-touch-icon.png" "img/avatar.jpg" "img/portrait.jpg" "00f8b33c4e8d51284748cf0461484cab.txt" "google99345328012e1bba.html" "yandex_4bd6292e127bb743.html")
 
 SSL_OPT=""
 if [ "${FTP_SSL:-0}" = "1" ]; then SSL_OPT="--ssl-reqd"; fi
