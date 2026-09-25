@@ -29,7 +29,12 @@ echo "→ Деплой на ${FTP_HOST}:${FTP_DIR}"
 for f in "${FILES[@]}"; do
   if [ ! -f "$DIR/$f" ]; then echo "  пропуск (нет файла): $f"; continue; fi
   echo "  ↑ $f"
-  curl -sS $SSL_OPT --ftp-create-dirs -T "$DIR/$f" \
-    "ftp://${FTP_HOST}/${FTP_DIR%/}/$f" --user "${FTP_USER}:${FTP_PASS}"
+  # Заливаем во временный файл и переименовываем только после успешной передачи:
+  # обрыв соединения не должен оставить на проде пустой или недокачанный файл.
+  name="$(basename "$f")"
+  curl -sS $SSL_OPT --ftp-create-dirs --retry 3 --retry-all-errors --max-time 120 \
+    -T "$DIR/$f" "ftp://${FTP_HOST}/${FTP_DIR%/}/$f.uploading" \
+    -Q "-RNFR $name.uploading" -Q "-RNTO $name" \
+    --user "${FTP_USER}:${FTP_PASS}"
 done
 echo "✓ Готово."
