@@ -23,7 +23,8 @@ source "$CFG"
 FILES=("index.html" "robots.txt" "sitemap.xml" "og-image.jpg" "apple-touch-icon.png" "img/avatar.jpg" "img/portrait.jpg" "00f8b33c4e8d51284748cf0461484cab.txt" "google99345328012e1bba.html" "yandex_4bd6292e127bb743.html" "privacy.html" ".htaccess" ".well-known/security.txt")
 
 SSL_OPT=""
-if [ "${FTP_SSL:-0}" = "1" ]; then SSL_OPT="--ssl-reqd"; fi
+# TLS 1.2: на TLS 1.3 FTPS-сервер REG.RU подвисает на файлах от ~100 КБ (226 не приходит).
+if [ "${FTP_SSL:-0}" = "1" ]; then SSL_OPT="--ssl-reqd --tlsv1.2 --tls-max 1.2"; fi
 
 echo "→ Деплой на ${FTP_HOST}:${FTP_DIR}"
 for f in "${FILES[@]}"; do
