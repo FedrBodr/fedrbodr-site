@@ -45,10 +45,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
-<!-- Analytics: инициализируется только на боевом домене, чтобы localhost/превью не пачкали статистику -->
-<script>
+<!-- Analytics: только на боевом домене и только после согласия в cookie-баннере -->
+<script id="analytics">
 (function(){
-  if (location.hostname !== 'fedrbodr.com') return;
+  var started = false;
+  window.fedrbodrStartAnalytics = function(){
+  if (started || location.hostname !== 'fedrbodr.com') return;
+  started = true;
 
   /* Яндекс.Метрика: официальный тег (defer) */
   (function(m,e,t,r,i,k,a){
@@ -64,15 +67,10 @@
     accurateTrackBounce: true
   });
 
-  /* Google Analytics 4: gtag.js */
-  var gs = document.createElement('script');
-  gs.async = true;
-  gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1JEYNEBCW1';
-  document.head.appendChild(gs);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function(){ dataLayer.push(arguments); };
-  gtag('js', new Date());
-  gtag('config', 'G-1JEYNEBCW1');
+  };
+  try {
+    if (localStorage.getItem('fedrbodr.cookies') === 'accepted') window.fedrbodrStartAnalytics();
+  } catch (_) {}
 })();
 </script>
 
@@ -309,6 +307,13 @@
   .foot-links{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
   .foot-links a{color:var(--muted);font-weight:600}
   .foot-links a:hover{color:var(--blue)}
+  .cookie-settings{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+  .cookie-settings:hover{color:var(--blue)}
+  .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:70;max-width:640px;margin:0 auto;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.35);font-size:14px;line-height:1.5}
+  .cookie-banner[hidden]{display:none}
+  .cookie-banner a{color:var(--sky)}
+  .cookie-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .cookie-actions .btn{padding:10px 18px;font-size:14px}
 
   [hidden]{display:none!important}
 </style>
@@ -569,7 +574,6 @@
     <div class="link-grid">
       <a class="link-card" href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener"><span>Telegram<small data-i18n data-ru="Живой дневник" data-en="Live journal">Живой дневник</small></span><span class="arrow">→</span></a>
       <a class="link-card" href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener"><span>LinkedIn<small data-i18n data-ru="Build in public (EN)" data-en="Build in public (EN)">Build in public (EN)</small></span><span class="arrow">→</span></a>
-      <a class="link-card" href="https://instagram.com/fedrbodr" target="_blank" rel="noopener"><span>Instagram<small data-i18n data-ru="Бэкстейдж" data-en="Backstage">Бэкстейдж</small></span><span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -594,12 +598,47 @@
       <a href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener">Telegram</a>
       <a href="mailto:fedrbodr@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://instagram.com/fedrbodr" target="_blank" rel="noopener">Instagram</a>
       <a href="https://vezdepost.ru" target="_blank" rel="noopener">Vezdepost</a>
+      <a href="/privacy.html" data-i18n data-ru="Политика конфиденциальности" data-en="Privacy policy">Политика конфиденциальности</a>
+      <button type="button" class="cookie-settings" data-i18n data-ru="Настройки cookie" data-en="Cookie settings">Настройки cookie</button>
     </div>
     <div data-i18n data-ru="© 2026 Дмитрий Федоренко (FedrBodr)." data-en="© 2026 Dmitry Fedorenko (FedrBodr).">© 2026 Дмитрий Федоренко (FedrBodr).</div>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-labelledby="cookie-banner-text" hidden>
+  <p id="cookie-banner-text" data-i18n data-ru='Сайт использует cookie Яндекс.Метрики, чтобы понимать, какие разделы полезны. Аналитика включится только с вашего согласия. <a href="/privacy.html">Подробнее</a>' data-en='This site uses Yandex Metrica cookies to see which sections are useful. Analytics runs only with your consent. <a href="/privacy.html">Details</a>'>Сайт использует cookie Яндекс.Метрики, чтобы понимать, какие разделы полезны. Аналитика включится только с вашего согласия. <a href="/privacy.html">Подробнее</a></p>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" id="cookie-accept" data-i18n data-ru="Принять" data-en="Accept">Принять</button>
+    <button type="button" class="btn btn-ghost" id="cookie-decline" data-i18n data-ru="Отказаться" data-en="Decline">Отказаться</button>
+  </div>
+</div>
+
+<script id="cookie-consent">
+(function(){
+  var STORAGE_KEY = 'fedrbodr.cookies';
+  var banner = document.getElementById('cookie-banner');
+
+  function saved(){
+    try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; }
+  }
+
+  function choose(value){
+    try { localStorage.setItem(STORAGE_KEY, value); } catch (_) {}
+    banner.hidden = true;
+    if (value === 'accepted' && window.fedrbodrStartAnalytics) window.fedrbodrStartAnalytics();
+  }
+
+  document.getElementById('cookie-accept').addEventListener('click', function(){ choose('accepted'); });
+  document.getElementById('cookie-decline').addEventListener('click', function(){ choose('declined'); });
+  document.querySelectorAll('.cookie-settings').forEach(function(button){
+    button.addEventListener('click', function(){ banner.hidden = false; });
+  });
+
+  var choice = saved();
+  if (choice !== 'accepted' && choice !== 'declined') banner.hidden = false;
+})();
+</script>
 
 <script id="theme-switcher">
 (function(){
@@ -705,7 +744,6 @@
   function track(goal, params){
     if (location.hostname !== 'fedrbodr.com') return;
     if (typeof ym === 'function') ym(YM_ID, 'reachGoal', goal, params);
-    if (typeof gtag === 'function') gtag('event', goal, params || {});
   }
 
   function sectionOf(el){
@@ -718,7 +756,6 @@
 
   var SOCIALS = {
     'linkedin.com': 'linkedin',
-    'instagram.com': 'instagram',
     'github.com': 'github'
   };
 
@@ -980,7 +1017,6 @@
     try {
       if (location.hostname !== 'fedrbodr.com') return;
       if (typeof ym === 'function') ym(110561904, 'reachGoal', goal, {});
-      if (typeof gtag === 'function') gtag('event', goal, {});
     } catch (_) {}
   }
 
@@ -1003,7 +1039,7 @@
     handoffEl.appendChild(select);
     var contact = document.createElement('input');
     contact.type = 'text'; contact.id = 'assistant-contact'; contact.maxLength = 254;
-    contact.placeholder = '@username / +7… / you@mail.com';
+    contact.placeholder = '@username / +7… / name@example.com';
     handoffEl.appendChild(contact);
     var agree = el('label', 'wizard-consent');
     var box = document.createElement('input');
@@ -1249,7 +1285,6 @@
     try {
       if (location.hostname !== 'fedrbodr.com') return;
       if (typeof ym === 'function') ym(110561904, 'reachGoal', goal, {});
-      if (typeof gtag === 'function') gtag('event', goal, {});
     } catch (_) {}
   }
   document.getElementById('assistant-float-close').addEventListener('click', function(){

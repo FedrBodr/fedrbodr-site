@@ -1,0 +1,23 @@
+# Security headers for fedrbodr.com (REG.RU shared hosting: nginx -> Apache, mod_headers).
+# The nginx config is not editable on this plan, so headers are set here.
+#
+# CSP runs in Report-Only mode: violations show up in the browser DevTools console
+# and nothing is blocked. Once the console is clean on /, /privacy.html and /prostranstvo/,
+# rename Content-Security-Policy-Report-Only to Content-Security-Policy.
+#
+# script-src lists sha256 hashes of the inline <script> blocks in index.html.
+# Any edit to an inline script changes its hash: `node --test tests/*.test.mjs` prints the new list.
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'sha256-sNq4FKOHQN/L+a34/QdExEBsLYAD3HLUWa5hvY5PFBE=' 'sha256-xeIbv9kzN+RbA6WzoOu8YpgqTNChFB242030OXqTR4c=' 'sha256-OomiZ2vcBWReugMNxfhAswXS5r9L2Y2s94UC/6xwNMA=' 'sha256-mjkj/IzLjRICw8TEqEmppGUehu7m0LjJGwc5t5IsntQ=' 'sha256-uECURVgrQF11EHovttaLTbRfAsrnlbB/UxnzTpX6yk4=' 'sha256-Bcenim7JyF5dyq1r3T0oc/9fPqTZaeBLiDEObWKyciI=' 'sha256-xIbYCbI6byA+7dyYGUjt9xvMm07a0Vns7ZJ+uWiZj4M=' 'sha256-+veBaE4rYnphfsDyQD+x2XpbWVPfOc5YLdXglm6WgT0=' https://mc.yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://studio.fedrbodr.com https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru; frame-src blob: https://mc.yandex.ru https://mc.yandex.com; child-src blob: https://mc.yandex.ru https://mc.yandex.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+</IfModule>
+
+# Deploy backups of the map sections (name_prev_20260923T221244Z/, name_upload_…/) stay on the host
+# but are not served.
+<IfModule mod_alias.c>
+  RedirectMatch 404 ^/[^/]+_(prev|upload)_[0-9]{8}T[0-9]{6}Z(/|$)
+</IfModule>

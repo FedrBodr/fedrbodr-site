@@ -1,0 +1,6 @@
+Contact: mailto:fedrbodr@gmail.com
+Contact: https://t.me/FedrBodr
+Expires: 2027-09-25T00:00:00.000Z
+Preferred-Languages: ru, en
+Canonical: https://fedrbodr.com/.well-known/security.txt
+Policy: https://fedrbodr.com/privacy.html
