@@ -1,0 +1,16 @@
+# FedrBodr
+
+> Студия Дмитрия и Тати: интерактивные 2D- и 3D-карты мероприятий, площадок, парков и территорий под ключ, с аналитикой и продажей билетов. Работаем по всей России.
+
+## Услуги
+- [Разработка интерактивной карты под ключ](https://fedrbodr.com/interactive-map/): сравнение способов (конструктор, своя разработка, студия), этапы, сроки, частые вопросы
+- [Цены в markdown](https://fedrbodr.com/interactive-map/pricing.md): от 30 000 ₽
+- [Пространство — 3D-карты площадок и событий](https://fedrbodr.com/prostranstvo/)
+
+## Примеры
+- [Карта фестиваля Chicano Day в LovelyLOFT](https://fedrbodr.com/chicano-day/)
+- [«Батарея» — интерактивная схема инсталляции](https://fedrbodr.com/batareya/)
+
+## Контакты
+- Telegram: https://t.me/FedrBodr
+- Почта: fedrbodr@gmail.com

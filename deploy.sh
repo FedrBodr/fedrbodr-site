@@ -20,7 +20,7 @@ source "$CFG"
 : "${FTP_DIR:?нужен FTP_DIR в deploy.config}"
 
 # Список файлов сайта, которые заливаем
-FILES=("index.html" "robots.txt" "sitemap.xml" "og-image.jpg" "apple-touch-icon.png" "img/avatar.jpg" "img/portrait.jpg" "00f8b33c4e8d51284748cf0461484cab.txt" "google99345328012e1bba.html" "yandex_4bd6292e127bb743.html" "privacy.html" ".htaccess" ".well-known/security.txt")
+FILES=("index.html" "robots.txt" "sitemap.xml" "og-image.jpg" "apple-touch-icon.png" "img/avatar.jpg" "img/portrait.jpg" "00f8b33c4e8d51284748cf0461484cab.txt" "google99345328012e1bba.html" "yandex_4bd6292e127bb743.html" "privacy.html" "llms.txt" ".htaccess" ".well-known/security.txt")
 
 SSL_OPT=""
 # TLS 1.2: на TLS 1.3 FTPS-сервер REG.RU подвисает на файлах от ~100 КБ (226 не приходит).
