@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fedrbodr.com/</loc></url>
-  <url><loc>https://fedrbodr.com/prostranstvo/</loc></url>
+  <url><loc>https://fedrbodr.com/</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fedrbodr.com/prostranstvo/</loc><lastmod>2026-09-27</lastmod></url>
   <url><loc>https://fedrbodr.com/interactive-map/</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://fedrbodr.com/chicano-day/</loc></url>
-  <url><loc>https://fedrbodr.com/batareya/</loc></url>
+  <url><loc>https://fedrbodr.com/chicano-day/</loc><lastmod>2026-09-29</lastmod></url>
+  <url><loc>https://fedrbodr.com/batareya/</loc><lastmod>2026-09-19</lastmod></url>
 </urlset>
