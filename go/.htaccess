@@ -1,0 +1,12 @@
+# Короткие ссылки fedrbodr.com/go/<код> → полный адрес с UTM-метками.
+# Правила разметки: fedrbodr-publicity/docs/utm-links.md.
+#
+# Одна строка — одна ссылка:
+#   RedirectMatch 302 ^/go/<код>/?$ <полный адрес с utm_source, utm_medium, utm_campaign>
+# Код: строчная латиница, цифры и дефис; один код на пост и площадку (chicano-vk, chicano-tg).
+# 302, а не 301: браузер не запоминает редирект, ссылку можно перенаправить после публикации.
+# Проверка формата и меток: node --test tests/*.test.mjs
+
+<IfModule mod_alias.c>
+  RedirectMatch 302 ^/go/utm-check/?$ https://fedrbodr.com/?utm_source=test&utm_medium=test&utm_campaign=short-links-check
+</IfModule>

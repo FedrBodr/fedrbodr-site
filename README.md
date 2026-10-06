@@ -34,5 +34,6 @@
 
 - `index.html` — сайт
 - `deploy.sh` — скрипт заливки по FTP (curl, без зависимостей)
+- `go/.htaccess` — короткие ссылки `fedrbodr.com/go/<код>` на адреса с UTM-метками
 - `deploy.config` — твои доступы (не в git)
 - `deploy.config.example` — шаблон доступов
