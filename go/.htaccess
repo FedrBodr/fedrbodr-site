@@ -9,4 +9,5 @@
 
 <IfModule mod_alias.c>
   RedirectMatch 302 ^/go/utm-check/?$ https://fedrbodr.com/?utm_source=test&utm_medium=test&utm_campaign=short-links-check
+  RedirectMatch 302 ^/go/hustler-tg/?$ https://fedrbodr.com/prostranstvo/?utm_source=telegram&utm_medium=social&utm_campaign=hustler-1006
 </IfModule>
