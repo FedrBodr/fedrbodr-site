@@ -14,4 +14,9 @@
   RedirectMatch 302 ^/go/hustler-vk/?$ https://fedrbodr.com/prostranstvo/?utm_source=vk&utm_medium=social&utm_campaign=hustler-1006
   RedirectMatch 302 ^/go/hustler-tb/?$ https://fedrbodr.com/prostranstvo/?utm_source=tumblr&utm_medium=social&utm_campaign=hustler-1006
   RedirectMatch 302 ^/go/hustler-li/?$ https://fedrbodr.com/prostranstvo/?utm_source=linkedin&utm_medium=social&utm_campaign=hustler-1006
+  RedirectMatch 302 ^/go/chicano-tg/?$ https://fedrbodr.com/prostranstvo/?utm_source=telegram&utm_medium=social&utm_campaign=chicano-results-1009
+  RedirectMatch 302 ^/go/chicano-max/?$ https://fedrbodr.com/prostranstvo/?utm_source=max&utm_medium=social&utm_campaign=chicano-results-1009
+  RedirectMatch 302 ^/go/chicano-vk/?$ https://fedrbodr.com/prostranstvo/?utm_source=vk&utm_medium=social&utm_campaign=chicano-results-1009
+  RedirectMatch 302 ^/go/chicano-li/?$ https://fedrbodr.com/prostranstvo/?utm_source=linkedin&utm_medium=social&utm_campaign=chicano-results-1009
+  RedirectMatch 302 ^/go/chicano-story-tg/?$ https://fedrbodr.com/prostranstvo/?utm_source=telegram&utm_medium=social&utm_campaign=chicano-results-1009&utm_content=story
 </IfModule>
