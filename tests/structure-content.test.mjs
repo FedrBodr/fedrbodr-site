@@ -19,10 +19,22 @@ test('client-first contact CTA and trust line', () => {
   assert.match(contact, /data-en="Self-employed · contract-based · receipts provided"/);
 });
 
-test('section order puts assistant before build', () => {
-  const order = ['id="order"', 'id="cases"', 'id="experience"', 'id="about"', 'id="assistant"', 'id="build"', 'id="contact"'];
+test('3D maps spotlight comes right after the hero; build-in-public block is gone', () => {
+  const order = ['class="hero"', 'id="prostranstvo"', 'id="directions"', 'id="order"', 'id="cases"', 'id="experience"', 'id="about"', 'id="assistant"', 'id="contact"'];
   const positions = order.map((id) => html.indexOf(id));
+  assert.ok(positions.every((p) => p > 0), 'every section is present');
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
+  assert.doesNotMatch(html, /id="build"|href="#build"|href="#show"/);
+});
+
+test('Prostranstvo spotlight links to the live map and the order form', () => {
+  const spot = html.slice(html.indexOf('<section id="prostranstvo"'), html.indexOf('</section>', html.indexOf('<section id="prostranstvo"')));
+  assert.match(spot, /href="\/chicano-day\/"/);
+  assert.match(spot, /href="\/prostranstvo\/#lead-form"/);
+  assert.match(spot, /От 30 000 ₽/);
+  assert.match(spot, /From ₽30,000/);
+  assert.match(spot, /src="img\/chicano-overview-800\.webp"/);
+  assert.match(html, /<a href="#prostranstvo" class="nav-hl"/);
 });
 
 test('robots and sitemap exist with canonical URL', () => {

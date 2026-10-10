@@ -145,7 +145,7 @@
   .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);font-size:16px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
   .theme-toggle:hover{border-color:var(--blue);box-shadow:0 0 12px var(--accent-shadow)}
   @media(max-width:1180px){.nav-links{gap:14px}.nav-links a{font-size:13px}}
-  @media(max-width:1020px){.nav-links a[href="#show"],.nav-links a[href="#build"],.nav-links a[href="#experience"]{display:none}}
+  @media(max-width:1020px){.nav-links a[href="#about"],.nav-links a[href="#experience"]{display:none}}
   @media(max-width:820px){
     .nav-links{gap:10px}
     .nav-links a:not(.lang-wrap){display:none}
@@ -209,12 +209,24 @@
   .ep a{font-weight:700;color:var(--blue);font-size:14px}
   .ep.soon{opacity:.72}
 
-  /* Build in public / link grid */
-  .link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:26px}
-  .link-card{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:15px 17px;font-weight:600;transition:border-color .12s,transform .12s,box-shadow .12s}
-  .link-card:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 0 14px var(--accent-shadow)}
-  .link-card .arrow{color:var(--muted)}
-  .link-card small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+
+  /* Prostranstvo spotlight */
+  .nav-links a.nav-hl{color:var(--blue)}
+  .spotlight{background:linear-gradient(180deg,var(--soft-2),var(--bg));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .spot-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center}
+  .spot-text h2 .accent{color:var(--blue)}
+  .spot-list{margin:18px 0 0;padding-left:20px;color:var(--muted);line-height:1.6}
+  .spot-list li+li{margin-top:6px}
+  .spot-price{margin-top:18px;font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  .spot-text .cta-row{margin-top:18px}
+  .spot-text .fineprint{margin-top:14px;font-size:14px}
+  .spot-text .fineprint a{color:var(--sky)}
+  .spot-media{position:relative;display:block;padding-bottom:26px}
+  .spot-main{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 18px 44px rgba(0,0,0,.35)}
+  .spot-inset{position:absolute;right:-10px;bottom:0;width:42%;height:auto;border-radius:8px;border:2px solid var(--bg);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+  .spot-tag{position:absolute;left:12px;bottom:40px;font-family:"JetBrains Mono",monospace;font-size:12px;padding:5px 10px;border-radius:999px;background:rgba(10,10,10,.75);color:#3be8d4}
+  .spot-media:hover .spot-main{border-color:var(--blue)}
+  @media(max-width:820px){.spot-grid{grid-template-columns:1fr;gap:26px}.spot-media{order:-1}.spot-inset{right:0}}
 
   /* Projects */
   .project-group{margin-top:34px}
@@ -324,12 +336,10 @@
   <div class="wrap nav">
     <a href="#top" class="brand"><img class="brand-avatar" src="img/avatar.jpg" data-i18n-attr="alt" data-ru="Дмитрий Федоренко" data-en="Dmitry Fedorenko" alt="Дмитрий Федоренко" width="30" height="30" />FedrBodr</a>
     <nav class="nav-links">
+      <a href="#prostranstvo" class="nav-hl" data-i18n data-ru="3D-карты" data-en="3D maps">3D-карты</a>
       <a href="#about" data-i18n data-ru="Обо мне" data-en="About">Обо мне</a>
-      <a href="#show" data-i18n data-ru="Шоу" data-en="Show">Шоу</a>
-      <a href="#build" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</a>
       <a href="#projects" data-i18n data-ru="Проекты" data-en="Projects">Проекты</a>
       <a href="#order" data-i18n data-ru="Разработка" data-en="Development">Разработка</a>
-      <a href="/prostranstvo/" data-i18n data-ru="3D-карты" data-en="3D maps">3D-карты</a>
       <a href="#experience" data-i18n data-ru="Опыт" data-en="Track record">Опыт</a>
       <a href="#contact" data-i18n data-ru="Контакт" data-en="Contact">Контакт</a>
       <button type="button" class="theme-toggle" data-i18n-attr="aria-label" data-ru="Переключить тему" data-en="Toggle theme" aria-label="Переключить тему" aria-pressed="true"><span aria-hidden="true">☀</span></button>
@@ -368,6 +378,33 @@
   </div>
 </div>
 <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 150 40, 300 0, 450 20 S 750 40, 900 20 S 1200 0, 1200 20 L1200 40 L0 40 Z" fill="currentColor" opacity="0.35"/></svg>
+
+<!-- PROSTRANSTVO: 3D maps spotlight -->
+<section id="prostranstvo" class="spotlight">
+  <div class="wrap spot-grid">
+    <div class="spot-text">
+      <p class="eyebrow" data-i18n data-ru="Мой продукт · 3D-карты" data-en="My product · 3D maps">Мой продукт · 3D-карты</p>
+      <h2 data-i18n data-ru='«Пространство» — <span class="accent">3D-карта площадки или события</span> по одной ссылке' data-en='Prostranstvo — <span class="accent">a 3D map of your venue or event</span> behind one link'>«Пространство» — <span class="accent">3D-карта площадки или события</span> по одной ссылке</h2>
+      <p class="lead" data-i18n data-ru="Гости заранее гуляют по залам и двору, находят зоны, участников и вход. Открывается в браузере на телефоне, без приложений." data-en="Guests walk the halls and the yard in advance and find zones, participants and the entrance. Opens in a phone browser, no app needed.">Гости заранее гуляют по залам и двору, находят зоны, участников и вход. Открывается в браузере на телефоне, без приложений.</p>
+      <ul class="spot-list">
+        <li data-i18n data-ru="Зоны и этажи с описаниями и ссылками на участников" data-en="Zones and floors with descriptions and links to participants">Зоны и этажи с описаниями и ссылками на участников</li>
+        <li data-i18n data-ru="День и вечер, прогулка с друзьями, мини-игра и граффити-стена" data-en="Day and evening, a walk with friends, a mini-game and a graffiti wall">День и вечер, прогулка с друзьями, мини-игра и граффити-стена</li>
+        <li data-i18n data-ru="Статистика для организатора: какие зоны смотрят и куда переходят" data-en="Stats for the organiser: which zones people view and where they click">Статистика для организатора: какие зоны смотрят и куда переходят</li>
+      </ul>
+      <p class="spot-price" data-i18n data-ru="От 30 000 ₽ · 3–5 дней" data-en="From ₽30,000 · 3–5 days">От 30 000 ₽ · 3–5 дней</p>
+      <div class="cta-row">
+        <a href="/chicano-day/" class="btn btn-primary" data-i18n data-ru="Открыть карту Chicano Day" data-en="Open the Chicano Day map">Открыть карту Chicano Day</a>
+        <a href="/prostranstvo/#lead-form" class="btn btn-ghost" data-i18n data-ru="Заказать карту" data-en="Order a map">Заказать карту</a>
+      </div>
+      <p class="fineprint"><a href="/prostranstvo/" data-i18n data-ru="Как устроена карта, форматы и цены →" data-en="How the map works, formats and prices →">Как устроена карта, форматы и цены →</a></p>
+    </div>
+    <a class="spot-media" href="/chicano-day/" data-i18n-attr="aria-label" data-ru="Открыть 3D-карту фестиваля Chicano Day" data-en="Open the Chicano Day festival 3D map" aria-label="Открыть 3D-карту фестиваля Chicano Day">
+      <img class="spot-main" src="img/chicano-overview-800.webp" width="800" height="571" loading="lazy" decoding="async" data-i18n-attr="alt" data-ru="3D-карта фестиваля Chicano Day в LovelyLOFT: двор с лоурайдерами, залы и зоны" data-en="Chicano Day festival 3D map at LovelyLOFT: the yard with lowriders, halls and zones" alt="3D-карта фестиваля Chicano Day в LovelyLOFT: двор с лоурайдерами, залы и зоны" />
+      <img class="spot-inset" src="img/chicano-night-800.webp" width="800" height="571" loading="lazy" decoding="async" data-i18n-attr="alt" data-ru="Та же карта в вечернем режиме" data-en="The same map in evening mode" alt="Та же карта в вечернем режиме" />
+      <span class="spot-tag" data-i18n data-ru="// живой пример: Chicano Day, LovelyLOFT" data-en="// live example: Chicano Day, LovelyLOFT">// живой пример: Chicano Day, LovelyLOFT</span>
+    </a>
+  </div>
+</section>
 
 <!-- DIRECTIONS -->
 <section id="directions" class="directions">
@@ -481,7 +518,7 @@
     <h2 data-i18n data-ru="Из корпоративной разработки в собственные IT-продукты" data-en="From corporate engineering to my own IT products">Из корпоративной разработки в собственные IT-продукты</h2>
     <div class="about-grid">
       <p data-i18n data-ru="Днём я инженер. Годами строил чужие продукты внутри корпоративной системы, а когда выгорал, уходил делать своё. Так появилась серия попыток: <strong>BroKey</strong>, <strong><a href='https://github.com/FedrBodr/exchange-arbitr' target='_blank' rel='noopener'>DeepForks</a></strong>, <strong><a href='https://author.polyglot.moscow' target='_blank' rel='noopener'>Polyglot</a></strong>. Сейчас главный фокус — собственные IT-продукты, которые довожу от идеи до прода за несколько недель. Свежий из них: <strong><a href='https://vezdepost.ru/' target='_blank' rel='noopener'>Vezdepost</a></strong>, open-source планировщик постов для 30+ платформ." data-en="By day I'm an engineer. For years I built other people's products inside the corporate machine, and whenever I burned out, I'd go build my own. That turned into a series of attempts: <strong>BroKey</strong>, <strong><a href='https://github.com/FedrBodr/exchange-arbitr' target='_blank' rel='noopener'>DeepForks</a></strong>, <strong><a href='https://author.polyglot.moscow' target='_blank' rel='noopener'>Polyglot</a></strong>. Today my main focus is my own IT products, shipped from idea to production in a few weeks. The latest is <strong><a href='https://vezdepost.ru/' target='_blank' rel='noopener'>Vezdepost</a></strong>, an open-source post scheduler for 30+ platforms.">Днём я инженер. Годами строил чужие продукты внутри корпоративной системы, а когда выгорал, уходил делать своё. Так появилась серия попыток: <strong>BroKey</strong>, <strong><a href="https://github.com/FedrBodr/exchange-arbitr" target="_blank" rel="noopener">DeepForks</a></strong>, <strong><a href="https://author.polyglot.moscow" target="_blank" rel="noopener">Polyglot</a></strong>. Сейчас главный фокус — собственные IT-продукты, которые довожу от идеи до прода за несколько недель. Свежий из них: <strong><a href="https://vezdepost.ru/" target="_blank" rel="noopener">Vezdepost</a></strong>, open-source планировщик постов для 30+ платформ.</p>
-      <p data-i18n data-ru="Делаю это открыто, в формате build-in-public: не блог про «успех», а журнал экспериментов. Каждый шаг, код, продукт, маркетинг, цифры, на виду. Совмещаю работу на постоянке с проектами благодаря ИИ. А для души: <strong>«Русский Лайнап»</strong>, электросёрф-бренд, который собираю с нуля как хобби." data-en="I do it openly, build-in-public style: not a success blog, but a lab journal. Every step, code, product, marketing, numbers, is out in the open. I juggle a full-time job with my projects thanks to AI. And for the soul: <strong>Russian Lineup</strong>, an electric-surf brand I'm building from scratch as a hobby.">Делаю это открыто, в формате build-in-public: не блог про «успех», а журнал экспериментов. Каждый шаг, код, продукт, маркетинг, цифры, на виду. Совмещаю работу на постоянке с проектами благодаря ИИ. А для души: <strong>«Русский Лайнап»</strong>, электросёрф-бренд, который собираю с нуля как хобби.</p>
+      <p data-i18n data-ru="Сейчас мой главный продукт — <strong><a href='#prostranstvo'>«Пространство»</a></strong>: интерактивные 3D-карты площадок и событий. Совмещаю работу на постоянке с проектами благодаря ИИ. А для души: <strong>«Русский Лайнап»</strong>, электросёрф-бренд, который собираю с нуля как хобби." data-en="My main product now is <strong><a href='#prostranstvo'>Prostranstvo</a></strong>: interactive 3D maps of venues and events. I juggle a full-time job with my projects thanks to AI. And for the soul: <strong>Russian Lineup</strong>, an electric-surf brand I'm building from scratch as a hobby.">Сейчас мой главный продукт — <strong><a href='#prostranstvo'>«Пространство»</a></strong>: интерактивные 3D-карты площадок и событий. Совмещаю работу на постоянке с проектами благодаря ИИ. А для души: <strong>«Русский Лайнап»</strong>, электросёрф-бренд, который собираю с нуля как хобби.</p>
     </div>
   </div>
 </section>
@@ -565,18 +602,6 @@
   </div>
 </section>
 
-<!-- BUILD IN PUBLIC -->
-<section id="build">
-  <div class="wrap">
-    <p class="eyebrow" data-i18n data-ru="Build in public" data-en="Build in public">Build in public</p>
-    <h2 data-i18n data-ru="Где я пишу процесс" data-en="Where I post the process">Где я пишу процесс</h2>
-    <p class="lead" data-i18n data-ru="Дневник эксперимента живёт в нескольких местах, по-русски и по-английски." data-en="The experiment log lives in a few places, in Russian and English.">Дневник эксперимента живёт в нескольких местах, по-русски и по-английски.</p>
-    <div class="link-grid">
-      <a class="link-card" href="https://t.me/fedrbodr_start_up" target="_blank" rel="noopener"><span>Telegram<small data-i18n data-ru="Живой дневник" data-en="Live journal">Живой дневник</small></span><span class="arrow">→</span></a>
-      <a class="link-card" href="https://www.linkedin.com/in/dmitry-fedorenko/" target="_blank" rel="noopener"><span>LinkedIn<small data-i18n data-ru="Build in public (EN)" data-en="Build in public (EN)">Build in public (EN)</small></span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -792,6 +817,12 @@
 
     var url;
     try { url = new URL(a.href, location.href); } catch (_) { return; }
+
+    // Цель: переход к 3D-картам (страница продукта или живая карта)
+    if (url.hostname === location.hostname && /^\/(prostranstvo|chicano-day)\//.test(url.pathname)) {
+      track('prostranstvo_click', { section: section, target: url.pathname });
+      return;
+    }
     var host = url.hostname.replace(/^www\./, '');
 
     // Цель: любая ссылка на t.me/*
